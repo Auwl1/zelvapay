@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Plans — ZelvaPay Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/zelvapay/css/main.css" />
+  <style>
+    .admin-layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+    .admin-sidebar{background:linear-gradient(180deg,#0a0e1a 0%,#060810 100%);border-right:1px solid var(--border);position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+    .admin-sidebar-logo{padding:24px 20px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+    .admin-badge{background:rgba(249,115,22,0.15);color:var(--orange);font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:1px}
+    .admin-nav-group{padding:16px 12px 8px}
+    .admin-nav-label{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;padding:0 8px;margin-bottom:6px;display:block}
+    .admin-nav-link{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;color:var(--text3);font-size:13px;font-weight:500;transition:all 0.2s;text-decoration:none;margin-bottom:1px}
+    .admin-nav-link:hover{color:var(--text);background:var(--surface)}
+    .admin-nav-link.active{color:var(--text);background:var(--surface);border:1px solid var(--border2)}
+    .nav-icon{font-size:15px;width:18px;text-align:center}
+    .alert-badge{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;background:var(--red);color:#fff;border-radius:50%;font-size:10px;font-weight:700;margin-left:auto}
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;display:none;align-items:center;justify-content:center}
+    .modal-overlay.show{display:flex}
+    .modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:32px;width:520px;max-width:90vw;max-height:90vh;overflow-y:auto}
+    .toggle{position:relative;width:44px;height:24px;background:var(--surface2);border-radius:12px;cursor:pointer;transition:background 0.2s;border:1px solid var(--border2);flex-shrink:0}
+    .toggle.on{background:var(--green)}
+    .toggle::after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:2px;left:2px;transition:left 0.2s}
+    .toggle.on::after{left:22px}
+    .network-tab{padding:8px 16px;border-radius:8px;border:1px solid var(--border);background:none;color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:all 0.2s}
+    .network-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  </style>
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <span style="font-family:var(--font-display);font-size:18px;font-weight:800;">Zelva<span style="color:var(--accent)">Pay</span></span>
+      <span class="admin-badge">Admin</span>
+    </div>
+    <div style="flex:1;overflow-y:auto">
+      <div class="admin-nav-group">
+        <span class="admin-nav-label">Overview</span>
+        <a href="/zelvapay/admin/admin-dashboard.html" class="admin-nav-link"><span class="nav-icon">📊</span> Dashboard</a>
+      </div>
+      <div class="admin-nav-group">
+        <span class="admin-nav-label">Users</span>
+        <a href="/zelvapay/admin/admin-users.html" class="admin-nav-link"><span class="nav-icon">👥</span> All Users</a>
+        <a href="/zelvapay/admin/admin-wallets.html" class="admin-nav-link"><span class="nav-icon">💰</span> Wallets</a>
+        <a href="/zelvapay/admin/admin-kyc.html" class="admin-nav-link"><span class="nav-icon">🪪</span> KYC Verification <span class="alert-badge">4</span></a>
+      </div>
+      <div class="admin-nav-group">
+        <span class="admin-nav-label">Transactions</span>
+        <a href="/zelvapay/admin/admin-transactions.html" class="admin-nav-link"><span class="nav-icon">📋</span> All Transactions</a>
+        <a href="/zelvapay/admin/admin-failed.html" class="admin-nav-link"><span class="nav-icon">❌</span> Failed Txns <span class="alert-badge">7</span></a>
+      </div>
+      <div class="admin-nav-group">
+        <span class="admin-nav-label">Services</span>
+        <a href="/zelvapay/admin/admin-plans.html" class="admin-nav-link active"><span class="nav-icon">📶</span> Data Plans</a>
+        <a href="/zelvapay/admin/admin-providers.html" class="admin-nav-link"><span class="nav-icon">🔌</span> API Providers</a>
+        <a href="/zelvapay/admin/admin-giftcards.html" class="admin-nav-link"><span class="nav-icon">🎁</span> Gift Card Rates</a>
+      </div>
+      <div class="admin-nav-group">
+        <span class="admin-nav-label">Settings</span>
+        <a href="/zelvapay/admin/admin-settings.html" class="admin-nav-link"><span class="nav-icon">⚙️</span> Site Settings</a>
+      </div>
+    </div>
+    <div style="padding:16px;border-top:1px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--surface);border-radius:8px">
+        <div style="width:32px;height:32px;background:linear-gradient(135deg,var(--orange),var(--red));border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff">A</div>
+        <div><div style="font-size:13px;font-weight:600">Super Admin</div></div>
+        <a href="../pages/login.html" style="margin-left:auto;color:var(--text3);font-size:18px">⏻</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div><h1 class="page-title">Data Plans</h1><p class="page-sub">Manage pricing, availability, and API routing per plan.</p></div>
+      <button class="btn-primary" onclick="openModal('add-plan-modal')">+ Add Plan</button>
+    </div>
+
+    <!-- NETWORK TABS -->
+    <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap">
+      <button class="network-tab active" onclick="filterNetwork(this,'MTN')">🟡 MTN</button>
+      <button class="network-tab" onclick="filterNetwork(this,'Airtel')">🔴 Airtel</button>
+      <button class="network-tab" onclick="filterNetwork(this,'Glo')">🟢 Glo</button>
+      <button class="network-tab" onclick="filterNetwork(this,'9Mobile')">🟤 9Mobile</button>
+    </div>
+
+    <!-- PLANS TABLE -->
+    <div class="section-card">
+      <table class="table" id="plans-table">
+        <thead>
+          <tr><th>Plan Name</th><th>Size</th><th>Validity</th><th>Type</th><th>Price (₦)</th><th>Cost Price (₦)</th><th>Profit</th><th>API Provider</th><th>Active</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:var(--text)">MTN 1GB</strong></td>
+            <td style="font-family:var(--font-mono)">1GB</td>
+            <td>7 Days</td>
+            <td><span class="badge" style="background:rgba(108,99,255,0.1);color:var(--accent)">SME</span></td>
+            <td style="font-family:var(--font-mono);color:var(--text)">₦230</td>
+            <td style="font-family:var(--font-mono);color:var(--text3)">₦200</td>
+            <td style="font-family:var(--font-mono);color:var(--green)">₦30</td>
+            <td><span class="badge badge-success">GSUBZ</span></td>
+            <td><div class="toggle on" onclick="this.classList.toggle('on')"></div></td>
+            <td><div style="display:flex;gap:4px">
+              <button class="btn-icon" style="font-size:11px" onclick="editPlan('MTN 1GB',230)">Edit</button>
+              <button class="btn-icon" style="font-size:11px;color:var(--red)" onclick="deletePlan(this)">Delete</button>
+            </div></td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--text)">MTN 2GB</strong></td>
+            <td style="font-family:var(--font-mono)">2GB</td>
+            <td>30 Days</td>
+            <td><span class="badge" style="background:rgba(108,99,255,0.1);color:var(--accent)">SME</span></td>
+            <td style="font-family:var(--font-mono);color:var(--text)">₦460</td>
+            <td style="font-family:var(--font-mono);color:var(--text3)">₦400</td>
+            <td style="font-family:var(--font-mono);color:var(--green)">₦60</td>
+            <td><span class="badge badge-success">GSUBZ</span></td>
+            <td><div class="toggle on" onclick="this.classList.toggle('on')"></div></td>
+            <td><div style="display:flex;gap:4px">
+              <button class="btn-icon" style="font-size:11px" onclick="editPlan('MTN 2GB',460)">Edit</button>
+              <button class="btn-icon" style="font-size:11px;color:var(--red)" onclick="deletePlan(this)">Delete</button>
+            </div></td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--text)">MTN 5GB</strong></td>
+            <td style="font-family:var(--font-mono)">5GB</td>
+            <td>30 Days</td>
+            <td><span class="badge" style="background:rgba(56,189,248,0.1);color:var(--blue)">Gifting</span></td>
+            <td style="font-family:var(--font-mono);color:var(--text)">₦1,100</td>
+            <td style="font-family:var(--font-mono);color:var(--text3)">₦950</td>
+            <td style="font-family:var(--font-mono);color:var(--green)">₦150</td>
+            <td><span class="badge" style="background:rgba(249,115,22,0.1);color:var(--orange)">SMEPlug</span></td>
+            <td><div class="toggle on" onclick="this.classList.toggle('on')"></div></td>
+            <td><div style="display:flex;gap:4px">
+              <button class="btn-icon" style="font-size:11px" onclick="editPlan('MTN 5GB',1100)">Edit</button>
+              <button class="btn-icon" style="font-size:11px;color:var(--red)" onclick="deletePlan(this)">Delete</button>
+            </div></td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--text)">MTN 10GB</strong></td>
+            <td style="font-family:var(--font-mono)">10GB</td>
+            <td>30 Days</td>
+            <td><span class="badge" style="background:rgba(108,99,255,0.1);color:var(--accent)">SME</span></td>
+            <td style="font-family:var(--font-mono);color:var(--text)">₦2,000</td>
+            <td style="font-family:var(--font-mono);color:var(--text3)">₦1,800</td>
+            <td style="font-family:var(--font-mono);color:var(--green)">₦200</td>
+            <td><span class="badge badge-success">GSUBZ</span></td>
+            <td><div class="toggle" onclick="this.classList.toggle('on')"></div></td>
+            <td><div style="display:flex;gap:4px">
+              <button class="btn-icon" style="font-size:11px" onclick="editPlan('MTN 10GB',2000)">Edit</button>
+              <button class="btn-icon" style="font-size:11px;color:var(--red)" onclick="deletePlan(this)">Delete</button>
+            </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<!-- ADD / EDIT PLAN MODAL -->
+<div class="modal-overlay" id="add-plan-modal" onclick="if(event.target===this)closeModal('add-plan-modal')">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+      <h3 style="font-family:var(--font-display);font-size:20px;font-weight:700" id="modal-plan-title">Add Data Plan</h3>
+      <button style="background:none;border:none;color:var(--text3);font-size:20px;cursor:pointer" onclick="closeModal('add-plan-modal')">✕</button>
+    </div>
+    <form onsubmit="savePlan(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="form-group"><label class="form-label">Network</label>
+          <select class="form-select" id="plan-network"><option>MTN</option><option>Airtel</option><option>Glo</option><option>9Mobile</option></select>
+        </div>
+        <div class="form-group"><label class="form-label">Data Type</label>
+          <select class="form-select"><option>SME</option><option>Gifting</option><option>Corporate</option><option>Direct</option></select>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="form-group"><label class="form-label">Plan Name</label><input class="form-input" type="text" id="plan-name-input" placeholder="e.g. MTN 1GB" required /></div>
+        <div class="form-group"><label class="form-label">Data Size</label><input class="form-input" type="text" placeholder="e.g. 1GB" required /></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="form-group"><label class="form-label">Validity</label><input class="form-input" type="text" placeholder="e.g. 30 Days" required /></div>
+        <div class="form-group"><label class="form-label">Plan Code / ID</label><input class="form-input" type="text" placeholder="e.g. mtn_sme_1gb" style="font-family:var(--font-mono)" /></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="form-group"><label class="form-label">Selling Price (₦)</label><div class="input-group"><span class="input-prefix">₦</span><input class="form-input" id="sell-price" type="number" placeholder="230" required /></div></div>
+        <div class="form-group"><label class="form-label">Cost Price (₦)</label><div class="input-group"><span class="input-prefix">₦</span><input class="form-input" id="cost-price" type="number" placeholder="200" required /></div></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">API Provider (Vending Medium)</label>
+        <select class="form-select">
+          <option value="gsubz">GSUBZ</option>
+          <option value="smeplug">SMEPlug</option>
+          <option value="autopilotng">AutopilotNG</option>
+          <option value="ogdams">OGDAMS</option>
+          <option value="geodnatech">GeoDNATech</option>
+          <option value="datamall">DataMall</option>
+          <option value="vtpass">VTPass</option>
+        </select>
+        <p class="form-hint">This controls which API is called when someone buys this plan</p>
+      </div>
+      <div class="form-group">
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+          <div class="toggle on" onclick="this.classList.toggle('on')" id="plan-active-toggle"></div>
+          <span class="form-label" style="margin:0">Plan is active (visible to users)</span>
+        </label>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:8px">
+        <button type="button" class="btn-outline" style="flex:1" onclick="closeModal('add-plan-modal')">Cancel</button>
+        <button type="submit" class="btn-primary" style="flex:1">Save Plan</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="/zelvapay/js/main.js"></script>
+<script>
+function openModal(id) { document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+function filterNetwork(btn, net) {
+  document.querySelectorAll('.network-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  showToast('Showing ' + net + ' plans', 'success');
+}
+function editPlan(name, price) {
+  document.getElementById('modal-plan-title').textContent = 'Edit Plan';
+  document.getElementById('plan-name-input').value = name;
+  document.getElementById('sell-price').value = price;
+  openModal('add-plan-modal');
+}
+function deletePlan(btn) {
+  if (confirm('Delete this plan? Users will no longer see it.')) {
+    btn.closest('tr').remove();
+    showToast('Plan deleted', 'success');
+  }
+}
+function savePlan(e) {
+  e.preventDefault();
+  closeModal('add-plan-modal');
+  showToast('Plan saved successfully', 'success');
+}
+</script>
+</body>
+</html>

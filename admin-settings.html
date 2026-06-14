@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings — ZelvaPay Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/zelvapay/css/main.css" />
+  <style>
+    .admin-layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+    .admin-sidebar{background:linear-gradient(180deg,#0a0e1a 0%,#060810 100%);border-right:1px solid var(--border);position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+    .admin-sidebar-logo{padding:24px 20px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+    .admin-badge{background:rgba(249,115,22,0.15);color:var(--orange);font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:1px}
+    .admin-nav-group{padding:16px 12px 8px}
+    .admin-nav-label{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;padding:0 8px;margin-bottom:6px;display:block}
+    .admin-nav-link{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;color:var(--text3);font-size:13px;font-weight:500;transition:all 0.2s;text-decoration:none;margin-bottom:1px}
+    .admin-nav-link:hover{color:var(--text);background:var(--surface)}
+    .admin-nav-link.active{color:var(--text);background:var(--surface);border:1px solid var(--border2)}
+    .nav-icon{font-size:15px;width:18px;text-align:center}
+    .alert-badge{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;background:var(--red);color:#fff;border-radius:50%;font-size:10px;font-weight:700;margin-left:auto}
+    .toggle{position:relative;width:44px;height:24px;background:var(--surface2);border-radius:12px;cursor:pointer;transition:background 0.2s;border:1px solid var(--border2);flex-shrink:0}
+    .toggle.on{background:var(--green)}
+    .toggle::after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:2px;left:2px;transition:left 0.2s}
+    .toggle.on::after{left:22px}
+    .settings-row{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid var(--border)}
+    .settings-row:last-child{border:none}
+    .settings-label{font-weight:600;font-size:14px;margin-bottom:3px}
+    .settings-desc{font-size:12px;color:var(--text3)}
+  </style>
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <span style="font-family:var(--font-display);font-size:18px;font-weight:800;">Zelva<span style="color:var(--accent)">Pay</span></span>
+      <span class="admin-badge">Admin</span>
+    </div>
+    <div style="flex:1;overflow-y:auto">
+      <div class="admin-nav-group">
+        <span class="admin-nav-label">Overview</span>
+        <a href="/zelvapay/admin/admin-dashboard.html" class="admin-nav-link"><span class="nav-icon">📊</span> Dashboard</a>
+      </div>
+      <div class="admin-nav-group">
+        <span class="admin-nav-label">Users</span>
+        <a href="/zelvapay/admin/admin-users.html" class="admin-nav-link"><span class="nav-icon">👥</span> All Users</a>
+        <a href="/zelvapay/admin/admin-wallets.html" class="admin-nav-link"><span class="nav-icon">💰</span> Wallets</a>
+        <a href="/zelvapay/admin/admin-kyc.html" class="admin-nav-link"><span class="nav-icon">🪪</span> KYC Verification <span class="alert-badge">4</span></a>
+      </div>
+      <div class="admin-nav-group">
+        <span class="admin-nav-label">Transactions</span>
+        <a href="/zelvapay/admin/admin-transactions.html" class="admin-nav-link"><span class="nav-icon">📋</span> All Transactions</a>
+        <a href="/zelvapay/admin/admin-failed.html" class="admin-nav-link"><span class="nav-icon">❌</span> Failed Txns <span class="alert-badge">7</span></a>
+      </div>
+      <div class="admin-nav-group">
+        <span class="admin-nav-label">Services</span>
+        <a href="/zelvapay/admin/admin-plans.html" class="admin-nav-link"><span class="nav-icon">📶</span> Data Plans</a>
+        <a href="/zelvapay/admin/admin-providers.html" class="admin-nav-link"><span class="nav-icon">🔌</span> API Providers</a>
+        <a href="/zelvapay/admin/admin-giftcards.html" class="admin-nav-link"><span class="nav-icon">🎁</span> Gift Card Rates</a>
+      </div>
+      <div class="admin-nav-group">
+        <span class="admin-nav-label">Settings</span>
+        <a href="/zelvapay/admin/admin-settings.html" class="admin-nav-link active"><span class="nav-icon">⚙️</span> Site Settings</a>
+      </div>
+    </div>
+    <div style="padding:16px;border-top:1px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--surface);border-radius:8px">
+        <div style="width:32px;height:32px;background:linear-gradient(135deg,var(--orange),var(--red));border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff">A</div>
+        <div><div style="font-size:13px;font-weight:600">Super Admin</div></div>
+        <a href="../pages/login.html" style="margin-left:auto;color:var(--text3);font-size:18px">⏻</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div><h1 class="page-title">Site Settings</h1><p class="page-sub">Control every aspect of ZelvaPay from here.</p></div>
+      <button class="btn-primary" onclick="showToast('All settings saved','success')">💾 Save All</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+
+      <!-- GENERAL -->
+      <div class="section-card">
+        <div class="section-card-header"><span class="section-card-title">🌐 General</span></div>
+        <div style="padding:0 24px">
+          <div class="settings-row">
+            <div><div class="settings-label">Site Name</div><div class="settings-desc">Displayed in browser tab & emails</div></div>
+            <input class="form-input" value="ZelvaPay" style="width:200px" />
+          </div>
+          <div class="settings-row">
+            <div><div class="settings-label">Support Email</div><div class="settings-desc">Users contact this email</div></div>
+            <input class="form-input" value="support@zelvapay.com" type="email" style="width:200px" />
+          </div>
+          <div class="settings-row">
+            <div><div class="settings-label">Support WhatsApp</div><div class="settings-desc">WhatsApp number for support</div></div>
+            <input class="form-input" value="+2348012345678" style="width:200px;font-family:var(--font-mono)" />
+          </div>
+          <div class="settings-row">
+            <div><div class="settings-label">Maintenance Mode</div><div class="settings-desc">Temporarily blocks all user access</div></div>
+            <div class="toggle" onclick="this.classList.toggle('on');showToast('Maintenance mode updated','success')"></div>
+          </div>
+          <div class="settings-row">
+            <div><div class="settings-label">New Registrations</div><div class="settings-desc">Allow new users to sign up</div></div>
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERVICES TOGGLE -->
+      <div class="section-card">
+        <div class="section-card-header"><span class="section-card-title">🔧 Services On/Off</span></div>
+        <div style="padding:0 24px">
+          <div class="settings-row">
+            <div><div class="settings-label">Data Bundles</div><div class="settings-desc">Users can buy data</div></div>
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="settings-row">
+            <div><div class="settings-label">Airtime</div><div class="settings-desc">Users can buy airtime</div></div>
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="settings-row">
+            <div><div class="settings-label">Electricity</div><div class="settings-desc">Electricity token purchases</div></div>
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="settings-row">
+            <div><div class="settings-label">Cable TV</div><div class="settings-desc">DSTv, GOtv, Startimes</div></div>
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="settings-row">
+            <div><div class="settings-label">Virtual Cards</div><div class="settings-desc">USD & Naira card issuance</div></div>
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="settings-row">
+            <div><div class="settings-label">Gift Cards</div><div class="settings-desc">Buy & sell gift cards</div></div>
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="settings-row">
+            <div><div class="settings-label">Bank Transfer</div><div class="settings-desc">Send to bank accounts</div></div>
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="settings-row">
+            <div><div class="settings-label">Exam Pins</div><div class="settings-desc">WAEC, NECO, NABTEB</div></div>
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRANSACTION LIMITS -->
+      <div class="section-card">
+        <div class="section-card-header"><span class="section-card-title">💰 Transaction Limits</span></div>
+        <div style="padding:0 24px">
+          <div class="settings-row">
+            <div><div class="settings-label">Min Wallet Funding</div></div>
+            <div class="input-group" style="width:160px"><span class="input-prefix">₦</span><input class="form-input" value="100" type="number" /></div>
+          </div>
+          <div class="settings-row">
+            <div><div class="settings-label">Max Single Transfer</div></div>
+            <div class="input-group" style="width:160px"><span class="input-prefix">₦</span><input class="form-input" value="500000" type="number" /></div>
+          </div>
+          <div class="settings-row">
+            <div><div class="settings-label">Transfer Fee (₦)</div><div class="settings-desc">Flat fee per bank transfer</div></div>
+            <div class="input-group" style="width:160px"><span class="input-prefix">₦</span><input class="form-input" value="20" type="number" /></div>
+          </div>
+          <div class="settings-row">
+            <div><div class="settings-label">Virtual Card Fee (₦)</div><div class="settings-desc">Card creation fee</div></div>
+            <div class="input-group" style="width:160px"><span class="input-prefix">₦</span><input class="form-input" value="200" type="number" /></div>
+          </div>
+          <div class="settings-row">
+            <div><div class="settings-label">Airtime Cashback %</div><div class="settings-desc">% returned after airtime purchase</div></div>
+            <div class="input-group" style="width:160px"><span class="input-prefix">%</span><input class="form-input" value="2" type="number" /></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANNOUNCEMENTS -->
+      <div class="section-card">
+        <div class="section-card-header"><span class="section-card-title">📢 Announcements</span></div>
+        <div style="padding:24px">
+          <div class="form-group">
+            <label class="form-label">Banner Message</label>
+            <input class="form-input" type="text" placeholder="e.g. Scheduled maintenance on Sunday 2am - 4am" />
+            <p class="form-hint">Shown as a banner to all logged-in users. Leave blank to hide.</p>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Banner Type</label>
+            <select class="form-select">
+              <option>Info (Blue)</option><option>Success (Green)</option><option>Warning (Orange)</option><option>Error (Red)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Blast to All Users</label>
+            <textarea class="form-textarea" placeholder="Type your message to send to all users via email..."></textarea>
+          </div>
+          <button class="btn-primary btn-full" onclick="showToast('Email blast queued for 180,432 users','success')">📧 Send Email Blast</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- DANGER ZONE -->
+    <div class="section-card" style="margin-top:20px;border-color:rgba(248,113,113,0.3)">
+      <div class="section-card-header" style="background:rgba(248,113,113,0.05)">
+        <span class="section-card-title" style="color:var(--red)">⚠️ Danger Zone</span>
+      </div>
+      <div style="padding:24px;display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn-outline" style="border-color:var(--red);color:var(--red)" onclick="if(confirm('This will lock all accounts temporarily. Proceed?'))showToast('All accounts locked','success')">
+          🔒 Lock All Accounts
+        </button>
+        <button class="btn-outline" style="border-color:var(--red);color:var(--red)" onclick="if(confirm('Clear failed transaction queue?'))showToast('Queue cleared','success')">
+          🗑 Clear Failed Queue
+        </button>
+        <button class="btn-outline" style="border-color:var(--red);color:var(--red)" onclick="if(confirm('Force restart the application? This causes brief downtime.'))showToast('App restart triggered','success')">
+          🔄 Force App Restart
+        </button>
+      </div>
+    </div>
+
+  </main>
+</div>
+<script src="/zelvapay/js/main.js"></script>
+</body>
+</html>

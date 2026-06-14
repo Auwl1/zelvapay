@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exam Pins — ZelvaPay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/zelvapay/css/main.css" />
+</head>
+<body>
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><a href="/zelvapay/index.html" class="nav-logo" style="font-family:var(--font-display);font-size:20px;font-weight:800;">Zelva<span style="color:var(--accent)">Pay</span></a></div>
+    <nav class="sidebar-nav">
+      <a href="/zelvapay/pages/dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a>
+      <a href="/zelvapay/pages/data.html"><span class="nav-icon">📶</span> Buy Data</a>
+      <a href="/zelvapay/pages/airtime.html"><span class="nav-icon">📱</span> Buy Airtime</a>
+      <a href="/zelvapay/pages/electricity.html"><span class="nav-icon">⚡</span> Electricity</a>
+      <a href="/zelvapay/pages/cable.html"><span class="nav-icon">📺</span> Cable TV</a>
+      <a href="/zelvapay/pages/virtual-card.html"><span class="nav-icon">💳</span> Virtual Cards</a>
+      <a href="/zelvapay/pages/giftcard.html"><span class="nav-icon">🎁</span> Gift Cards</a>
+      <a href="/zelvapay/pages/transfer.html"><span class="nav-icon">🏦</span> Transfer</a>
+      <a href="/zelvapay/pages/exam.html" class="active"><span class="nav-icon">📝</span> Exam Pins</a>
+      <a href="/zelvapay/pages/transactions.html"><span class="nav-icon">📋</span> Transactions</a>
+      <a href="/zelvapay/pages/api-settings.html"><span class="nav-icon">🔑</span> API Settings</a>
+    </nav>
+    <div class="sidebar-footer"><div class="user-info"><div class="user-avatar">MA</div><div><div class="user-name">Muhammad Auwal</div></div></div></div>
+  </aside>
+  <main class="main-content">
+    <div style="max-width:520px">
+      <div class="page-header"><div><h1 class="page-title">Exam Pins</h1><p class="page-sub">Purchase WAEC, NECO, NABTEB result checker PINs.</p></div></div>
+      <div class="section-card">
+        <div style="padding:28px">
+          <form onsubmit="buyExamPin(event)">
+            <div class="form-group">
+              <label class="form-label">Exam Body</label>
+              <select class="form-select" id="exam-body" onchange="updateExamPrice()">
+                <option value="waec" data-price="3500">WAEC — West Africa Examinations Council</option>
+                <option value="neco" data-price="1000">NECO — National Examinations Council</option>
+                <option value="nabteb" data-price="900">NABTEB — National Business &amp; Technical Examinations Board</option>
+                <option value="nbais" data-price="500">NBAIS — National Board for Arabic &amp; Islamic Studies</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Number of PINs</label>
+              <input class="form-input" type="number" id="exam-qty" value="1" min="1" max="50" onchange="updateExamPrice()" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Delivery Email</label>
+              <input class="form-input" type="email" placeholder="pins@email.com" required />
+            </div>
+            <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:16px;margin-bottom:20px">
+              <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:8px">
+                <span style="color:var(--text3)">Price per PIN</span>
+                <span style="font-family:var(--font-mono)" id="per-pin-price">₦3,500</span>
+              </div>
+              <div style="border-top:1px solid var(--border);padding-top:10px;display:flex;justify-content:space-between;font-size:16px;font-weight:700">
+                <span>Total</span>
+                <span style="font-family:var(--font-mono);color:var(--accent)" id="total-price">₦3,500</span>
+              </div>
+            </div>
+            <button type="submit" class="btn-primary btn-full" style="padding:16px">Purchase PIN(s)</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="/zelvapay/js/main.js"></script>
+<script>
+function updateExamPrice() {
+  const sel = document.getElementById('exam-body');
+  const price = Number(sel.options[sel.selectedIndex].dataset.price);
+  const qty = Number(document.getElementById('exam-qty').value) || 1;
+  document.getElementById('per-pin-price').textContent = '₦' + price.toLocaleString();
+  document.getElementById('total-price').textContent = '₦' + (price * qty).toLocaleString();
+}
+function buyExamPin(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('[type="submit"]');
+  btn.textContent = 'Processing...'; btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = 'Purchase PIN(s)'; btn.disabled = false;
+    showToast('Exam PIN(s) sent to your email! 📝', 'success');
+  }, 2000);
+}
+</script>
+</body>
+</html>

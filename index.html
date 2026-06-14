@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZelvaPay — Nigeria's Premium Digital Finance Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/zelvapay/css/main.css" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Zelva<span>Pay</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="/zelvapay/pages/dashboard.html">Dashboard</a></li>
+    <li><a href="/zelvapay/pages/api-settings.html">API</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="/zelvapay/pages/login.html" class="btn-ghost">Sign in</a>
+    <a href="/zelvapay/pages/register.html" class="btn-primary">Get Started</a>
+  </div>
+  <button class="nav-toggle" onclick="toggleNav()">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      <span>Nigeria's #1 Digital Finance Platform</span>
+    </div>
+    <h1 class="hero-title">
+      Move money.<br/>
+      <span class="gradient-text">Buy anything.</span><br/>
+      Instantly.
+    </h1>
+    <p class="hero-sub">Data bundles, airtime, electricity, cable TV, virtual cards, gift cards — all in one ultra-fast platform built for speed and reliability.</p>
+    <div class="hero-actions">
+      <a href="/zelvapay/pages/register.html" class="btn-primary btn-xl">
+        Start for free
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+      <a href="/zelvapay/pages/dashboard.html" class="btn-outline btn-xl">View dashboard</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">₦2.4B+</span><span class="stat-label">Transactions</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><span class="stat-num">180K+</span><span class="stat-label">Users</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><span class="stat-num">99.9%</span><span class="stat-label">Uptime</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="phone-mockup">
+      <div class="phone-screen">
+        <div class="phone-header">
+          <span class="phone-time">9:41</span>
+          <span class="phone-signal">●●●</span>
+        </div>
+        <div class="phone-balance">
+          <p class="bal-label">Wallet Balance</p>
+          <h2 class="bal-amount">₦ 45,820.00</h2>
+          <p class="bal-sub">ZelvaPay Wallet</p>
+        </div>
+        <div class="phone-actions">
+          <div class="p-action"><div class="p-icon">📶</div><span>Data</span></div>
+          <div class="p-action"><div class="p-icon">📱</div><span>Airtime</span></div>
+          <div class="p-action"><div class="p-icon">⚡</div><span>Power</span></div>
+          <div class="p-action"><div class="p-icon">💳</div><span>Card</span></div>
+        </div>
+        <div class="phone-recent">
+          <p class="recent-label">Recent</p>
+          <div class="recent-item">
+            <div class="r-icon green">↑</div>
+            <div class="r-info"><span>MTN 10GB</span><small>Today 9:30am</small></div>
+            <span class="r-amount debit">-₦2,500</span>
+          </div>
+          <div class="recent-item">
+            <div class="r-icon blue">↓</div>
+            <div class="r-info"><span>Wallet Fund</span><small>Today 8:12am</small></div>
+            <span class="r-amount credit">+₦10,000</span>
+          </div>
+          <div class="recent-item">
+            <div class="r-icon orange">⚡</div>
+            <div class="r-info"><span>EKEDC Token</span><small>Yesterday</small></div>
+            <span class="r-amount debit">-₦5,000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">What we offer</span>
+      <h2>Everything you need, <br/><em>nothing you don't</em></h2>
+    </div>
+    <div class="services-grid">
+
+      <a href="/zelvapay/pages/data.html" class="service-card card-data">
+        <div class="card-icon">📶</div>
+        <h3>Data Bundles</h3>
+        <p>MTN, Airtel, Glo, 9Mobile — cheapest rates, instant delivery. SME, gifting, corporate plans.</p>
+        <div class="card-tag">From ₦230/GB</div>
+        <div class="card-arrow">→</div>
+      </a>
+
+      <a href="/zelvapay/pages/airtime.html" class="service-card card-airtime">
+        <div class="card-icon">📱</div>
+        <h3>Airtime</h3>
+        <p>Top up any Nigerian network instantly. Airtime-to-cash conversion available.</p>
+        <div class="card-tag">2% cashback</div>
+        <div class="card-arrow">→</div>
+      </a>
+
+      <a href="/zelvapay/pages/electricity.html" class="service-card card-electricity">
+        <div class="card-icon">⚡</div>
+        <h3>Electricity</h3>
+        <p>Prepaid & postpaid tokens for EKEDC, IKEDC, AEDC, PHEDC and all DISCOs.</p>
+        <div class="card-tag">Instant token</div>
+        <div class="card-arrow">→</div>
+      </a>
+
+      <a href="/zelvapay/pages/cable.html" class="service-card card-cable">
+        <div class="card-icon">📺</div>
+        <h3>Cable TV</h3>
+        <p>DSTv, GOtv, Startimes subscriptions renewed in seconds.</p>
+        <div class="card-tag">All bouquets</div>
+        <div class="card-arrow">→</div>
+      </a>
+
+      <a href="/zelvapay/pages/virtual-card.html" class="service-card card-vcard">
+        <div class="card-icon">💳</div>
+        <h3>Virtual Cards</h3>
+        <p>USD & Naira virtual cards for online payments, subscriptions, and international purchases.</p>
+        <div class="card-tag">Instant issuance</div>
+        <div class="card-arrow">→</div>
+      </a>
+
+      <a href="/zelvapay/pages/giftcard.html" class="service-card card-gift">
+        <div class="card-icon">🎁</div>
+        <h3>Gift Cards</h3>
+        <p>Buy & redeem Amazon, iTunes, Google Play, Steam, Netflix and 50+ gift card brands.</p>
+        <div class="card-tag">50+ brands</div>
+        <div class="card-arrow">→</div>
+      </a>
+
+      <a href="/zelvapay/pages/transfer.html" class="service-card card-transfer">
+        <div class="card-icon">🏦</div>
+        <h3>Bank Transfer</h3>
+        <p>Send money to any Nigerian bank account instantly. Low flat fees.</p>
+        <div class="card-tag">₦20 flat fee</div>
+        <div class="card-arrow">→</div>
+      </a>
+
+      <a href="/zelvapay/pages/exam.html" class="service-card card-exam">
+        <div class="card-icon">📝</div>
+        <h3>Exam Pins</h3>
+        <p>WAEC, NECO, NABTEB result checker PINs delivered instantly to your inbox.</p>
+        <div class="card-tag">Instant PIN</div>
+        <div class="card-arrow">→</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- API SECTION -->
+<section class="api-section" id="api">
+  <div class="container">
+    <div class="api-inner">
+      <div class="api-text">
+        <span class="eyebrow">For Developers</span>
+        <h2>Build with the <span class="gradient-text">ZelvaPay API</span></h2>
+        <p>Integrate data, airtime, bills, and virtual cards into your own app with our RESTful API. Simple authentication, detailed docs, test sandbox, and webhook support.</p>
+        <ul class="api-features">
+          <li><span class="check">✓</span> REST API with JSON responses</li>
+          <li><span class="check">✓</span> Test & Live environments</li>
+          <li><span class="check">✓</span> Webhook notifications</li>
+          <li><span class="check">✓</span> API key management dashboard</li>
+          <li><span class="check">✓</span> Rate limit controls</li>
+        </ul>
+        <a href="/zelvapay/pages/api-settings.html" class="btn-primary">View API Settings →</a>
+      </div>
+      <div class="api-code">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-title">Example Request</span>
+        </div>
+        <pre class="code-block"><code><span class="c-comment">// Buy MTN Data Bundle</span>
+<span class="c-keyword">const</span> response = <span class="c-keyword">await</span> fetch(<span class="c-string">'https://api.zelvapay.com/v1/data'</span>, {
+  method: <span class="c-string">'POST'</span>,
+  headers: {
+    <span class="c-string">'Authorization'</span>: <span class="c-string">`Bearer ${API_KEY}`</span>,
+    <span class="c-string">'Content-Type'</span>: <span class="c-string">'application/json'</span>
+  },
+  body: JSON.stringify({
+    network: <span class="c-string">'MTN'</span>,
+    phone: <span class="c-string">'08012345678'</span>,
+    plan_id: <span class="c-string">'mtn_1gb_30days'</span>,
+    amount: <span class="c-number">300</span>
+  })
+});
+
+<span class="c-keyword">const</span> data = <span class="c-keyword">await</span> response.json();
+<span class="c-comment">// { status: "success", ref: "ZLV-2839XY" }</span></code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Pricing</span>
+      <h2>Simple, transparent <em>pricing</em></h2>
+      <p>No hidden charges. Pay only for what you use.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier">Starter</div>
+        <div class="price-amount">Free</div>
+        <p class="price-desc">Perfect for personal use</p>
+        <ul class="price-features">
+          <li>✓ Data & Airtime purchases</li>
+          <li>✓ Electricity & Cable TV</li>
+          <li>✓ Wallet funding</li>
+          <li>✓ Transaction history</li>
+          <li class="dim">✗ Virtual Cards</li>
+          <li class="dim">✗ API Access</li>
+          <li class="dim">✗ Gift Cards</li>
+        </ul>
+        <a href="/zelvapay/pages/register.html" class="btn-outline btn-full">Get Started Free</a>
+      </div>
+
+      <div class="price-card price-featured">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-tier">Pro</div>
+        <div class="price-amount">₦2,000<span>/mo</span></div>
+        <p class="price-desc">For power users & resellers</p>
+        <ul class="price-features">
+          <li>✓ Everything in Starter</li>
+          <li>✓ Virtual USD & Naira cards</li>
+          <li>✓ Gift card purchases</li>
+          <li>✓ Airtime-to-cash</li>
+          <li>✓ Priority support</li>
+          <li>✓ Lower transaction fees</li>
+          <li class="dim">✗ API Access</li>
+        </ul>
+        <a href="/zelvapay/pages/register.html" class="btn-primary btn-full">Upgrade to Pro</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-tier">Business</div>
+        <div class="price-amount">₦8,000<span>/mo</span></div>
+        <p class="price-desc">For businesses & developers</p>
+        <ul class="price-features">
+          <li>✓ Everything in Pro</li>
+          <li>✓ Full API access</li>
+          <li>✓ Webhook integration</li>
+          <li>✓ Custom subdomain</li>
+          <li>✓ Dedicated account manager</li>
+          <li>✓ White-label option</li>
+          <li>✓ Bulk purchase discounts</li>
+        </ul>
+        <a href="/zelvapay/pages/register.html" class="btn-outline btn-full">Get Business</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">Zelva<span>Pay</span></a>
+        <p>Nigeria's most reliable digital finance platform. Fast, secure, and affordable.</p>
+        <div class="footer-socials">
+          <a href="#">𝕏</a>
+          <a href="#">in</a>
+          <a href="#">ig</a>
+          <a href="#">wa</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/zelvapay/pages/data.html">Data Bundles</a>
+          <a href="/zelvapay/pages/airtime.html">Airtime</a>
+          <a href="/zelvapay/pages/electricity.html">Electricity</a>
+          <a href="/zelvapay/pages/cable.html">Cable TV</a>
+          <a href="/zelvapay/pages/virtual-card.html">Virtual Cards</a>
+          <a href="/zelvapay/pages/giftcard.html">Gift Cards</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About</a>
+          <a href="#">Blog</a>
+          <a href="#">Careers</a>
+          <a href="#">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">AML Policy</a>
+        </div>
+        <div class="footer-col">
+          <h4>Developers</h4>
+          <a href="/zelvapay/pages/api-settings.html">API Keys</a>
+          <a href="#">Documentation</a>
+          <a href="#">Webhooks</a>
+          <a href="#">Status</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ZelvaPay Technologies Ltd. RC 1234567. Licensed by CBN.</p>
+      <p>Built with ❤️ in Nigeria 🇳🇬</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/zelvapay/js/main.js"></script>
+</body>
+</html>

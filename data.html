@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buy Data — ZelvaPay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/zelvapay/css/main.css" />
+  <style>
+    .network-btn {
+      display:flex; flex-direction:column; align-items:center; gap:8px;
+      padding:16px; border-radius:var(--radius-sm);
+      border:2px solid var(--border); background:var(--surface);
+      cursor:pointer; transition:all 0.2s; font-size:13px; font-weight:600;
+      color:var(--text2); min-width:90px;
+    }
+    .network-btn:hover { border-color:var(--border2); color:var(--text); }
+    .network-btn.active-network { border-color:var(--accent); color:var(--text); background:rgba(108,99,255,0.08); }
+    .network-icon { font-size:28px; }
+    .amount-preview {
+      background: var(--bg2); border:1px solid var(--border2); border-radius:var(--radius-sm);
+      padding:16px; margin-top:20px; display:none;
+    }
+    .amount-preview.show { display:flex; justify-content:space-between; align-items:center; }
+  </style>
+</head>
+<body>
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="/zelvapay/index.html" class="nav-logo" style="font-family:var(--font-display);font-size:20px;font-weight:800;">Zelva<span style="color:var(--accent)">Pay</span></a>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="/zelvapay/pages/dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a>
+      <a href="/zelvapay/pages/data.html" class="active"><span class="nav-icon">📶</span> Buy Data</a>
+      <a href="/zelvapay/pages/airtime.html"><span class="nav-icon">📱</span> Buy Airtime</a>
+      <a href="/zelvapay/pages/electricity.html"><span class="nav-icon">⚡</span> Electricity</a>
+      <a href="/zelvapay/pages/cable.html"><span class="nav-icon">📺</span> Cable TV</a>
+      <a href="/zelvapay/pages/virtual-card.html"><span class="nav-icon">💳</span> Virtual Cards</a>
+      <a href="/zelvapay/pages/giftcard.html"><span class="nav-icon">🎁</span> Gift Cards</a>
+      <a href="/zelvapay/pages/transfer.html"><span class="nav-icon">🏦</span> Transfer</a>
+      <a href="/zelvapay/pages/transactions.html"><span class="nav-icon">📋</span> Transactions</a>
+      <a href="/zelvapay/pages/api-settings.html"><span class="nav-icon">🔑</span> API Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <div class="user-avatar">MA</div>
+        <div><div class="user-name">Muhammad Auwal</div><div class="user-email">auwal@ajosdata.com</div></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div style="max-width:560px">
+      <div class="page-header" style="margin-bottom:28px">
+        <div>
+          <h1 class="page-title">Buy Data</h1>
+          <p class="page-sub">Wallet Balance: <strong style="color:var(--green)">₦45,820.00</strong></p>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div style="padding:28px">
+          <form onsubmit="submitForm(event, 'Data bundle purchased successfully! 📶')">
+
+            <!-- NETWORK -->
+            <div class="form-group">
+              <label class="form-label">Select Network</label>
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <button type="button" class="network-btn active-network" onclick="selectNetwork(this,'MTN')">
+                  <span class="network-icon">🟡</span>MTN
+                </button>
+                <button type="button" class="network-btn" onclick="selectNetwork(this,'Airtel')">
+                  <span class="network-icon">🔴</span>Airtel
+                </button>
+                <button type="button" class="network-btn" onclick="selectNetwork(this,'Glo')">
+                  <span class="network-icon">🟢</span>Glo
+                </button>
+                <button type="button" class="network-btn" onclick="selectNetwork(this,'9Mobile')">
+                  <span class="network-icon">🟤</span>9Mobile
+                </button>
+              </div>
+              <input type="hidden" id="network-input" value="MTN" />
+            </div>
+
+            <!-- DATA TYPE -->
+            <div class="form-group">
+              <label class="form-label">Data Type</label>
+              <select class="form-select">
+                <option value="sme">SME Data (Recommended)</option>
+                <option value="gifting">Gifting Data</option>
+                <option value="corporate">Corporate Data</option>
+                <option value="direct">Direct Data</option>
+              </select>
+            </div>
+
+            <!-- PLAN -->
+            <div class="form-group">
+              <label class="form-label">Select Plan</label>
+              <select class="form-select" id="plan-select">
+                <option value="">Select Plan</option>
+                <option value="mtn_500mb" data-price="130">500MB – 1 Day — ₦130</option>
+                <option value="mtn_1gb" data-price="230">1GB – 7 Days — ₦230</option>
+                <option value="mtn_2gb" data-price="460">2GB – 30 Days — ₦460</option>
+                <option value="mtn_5gb" data-price="1100">5GB – 30 Days — ₦1,100</option>
+                <option value="mtn_10gb" data-price="2000">10GB – 30 Days — ₦2,000</option>
+              </select>
+            </div>
+
+            <!-- PHONE -->
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input class="form-input" type="tel" placeholder="080XXXXXXXXX" maxlength="11" pattern="[0-9]{11}" />
+              <p class="form-hint">Enter the number to receive data</p>
+            </div>
+
+            <!-- AMOUNT PREVIEW -->
+            <div class="amount-preview" id="amount-preview">
+              <div>
+                <div style="font-size:12px;color:var(--text3)">Amount to pay</div>
+                <div style="font-family:var(--font-mono);font-size:20px;font-weight:700;color:var(--text)" id="plan-price">—</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:12px;color:var(--text3)">New Balance</div>
+                <div style="font-family:var(--font-mono);font-size:16px;color:var(--green)" id="new-balance">—</div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary btn-full" style="margin-top:24px;padding:16px">
+              Purchase Data Bundle
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="/zelvapay/js/main.js"></script>
+<script>
+  document.getElementById('plan-select').addEventListener('change', function () {
+    const price = this.options[this.selectedIndex].dataset.price;
+    if (price) {
+      document.getElementById('plan-price').textContent = '₦' + Number(price).toLocaleString();
+      document.getElementById('new-balance').textContent = '₦' + (45820 - Number(price)).toLocaleString();
+      document.getElementById('amount-preview').classList.add('show');
+    }
+  });
+  // Initialize MTN plans
+  loadPlans('MTN');
+</script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Users — ZelvaPay Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/zelvapay/css/main.css" />
+  <style>
+    .admin-layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+    .admin-sidebar{background:linear-gradient(180deg,#0a0e1a 0%,#060810 100%);border-right:1px solid var(--border);position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+    .admin-sidebar-logo{padding:24px 20px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+    .admin-badge{background:rgba(249,115,22,0.15);color:var(--orange);font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:1px}
+    .admin-nav-group{padding:16px 12px 8px}
+    .admin-nav-label{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;padding:0 8px;margin-bottom:6px;display:block}
+    .admin-nav-link{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;color:var(--text3);font-size:13px;font-weight:500;transition:all 0.2s;text-decoration:none;margin-bottom:1px}
+    .admin-nav-link:hover{color:var(--text);background:var(--surface)}
+    .admin-nav-link.active{color:var(--text);background:var(--surface);border:1px solid var(--border2)}
+    .nav-icon{font-size:15px;width:18px;text-align:center}
+    .alert-badge{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;background:var(--red);color:#fff;border-radius:50%;font-size:10px;font-weight:700;margin-left:auto}
+    .avatar{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;flex-shrink:0}
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;display:none;align-items:center;justify-content:center}
+    .modal-overlay.show{display:flex}
+    .modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:32px;width:480px;max-width:90vw}
+  </style>
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <span style="font-family:var(--font-display);font-size:18px;font-weight:800;">Zelva<span style="color:var(--accent)">Pay</span></span>
+      <span class="admin-badge">Admin</span>
+    </div>
+    <div style="flex:1;overflow-y:auto">
+      <div class="admin-nav-group">
+        <span class="admin-nav-label">Overview</span>
+        <a href="/zelvapay/admin/admin-dashboard.html" class="admin-nav-link"><span class="nav-icon">📊</span> Dashboard</a>
+      </div>
+      <div class="admin-nav-group">
+        <span class="admin-nav-label">Users</span>
+        <a href="/zelvapay/admin/admin-users.html" class="admin-nav-link active"><span class="nav-icon">👥</span> All Users</a>
+        <a href="/zelvapay/admin/admin-wallets.html" class="admin-nav-link"><span class="nav-icon">💰</span> Wallets</a>
+        <a href="/zelvapay/admin/admin-kyc.html" class="admin-nav-link"><span class="nav-icon">🪪</span> KYC Verification <span class="alert-badge">4</span></a>
+      </div>
+      <div class="admin-nav-group">
+        <span class="admin-nav-label">Transactions</span>
+        <a href="/zelvapay/admin/admin-transactions.html" class="admin-nav-link"><span class="nav-icon">📋</span> All Transactions</a>
+        <a href="/zelvapay/admin/admin-failed.html" class="admin-nav-link"><span class="nav-icon">❌</span> Failed Txns <span class="alert-badge">7</span></a>
+      </div>
+      <div class="admin-nav-group">
+        <span class="admin-nav-label">Services</span>
+        <a href="/zelvapay/admin/admin-plans.html" class="admin-nav-link"><span class="nav-icon">📶</span> Data Plans</a>
+        <a href="/zelvapay/admin/admin-providers.html" class="admin-nav-link"><span class="nav-icon">🔌</span> API Providers</a>
+        <a href="/zelvapay/admin/admin-giftcards.html" class="admin-nav-link"><span class="nav-icon">🎁</span> Gift Card Rates</a>
+      </div>
+      <div class="admin-nav-group">
+        <span class="admin-nav-label">Settings</span>
+        <a href="/zelvapay/admin/admin-settings.html" class="admin-nav-link"><span class="nav-icon">⚙️</span> Site Settings</a>
+      </div>
+    </div>
+    <div style="padding:16px;border-top:1px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--surface);border-radius:8px">
+        <div style="width:32px;height:32px;background:linear-gradient(135deg,var(--orange),var(--red));border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff">A</div>
+        <div><div style="font-size:13px;font-weight:600">Super Admin</div></div>
+        <a href="../pages/login.html" style="margin-left:auto;color:var(--text3);font-size:18px">⏻</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div><h1 class="page-title">Users</h1><p class="page-sub">180,432 registered users</p></div>
+      <div style="display:flex;gap:8px">
+        <button class="btn-outline" onclick="showToast('Exporting user list...','success')">📥 Export</button>
+        <button class="btn-primary" onclick="openModal('create-user-modal')">+ Add User</button>
+      </div>
+    </div>
+
+    <!-- FILTERS -->
+    <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+      <input class="form-input" type="search" placeholder="🔍 Search name, email, phone..." style="flex:1;min-width:200px" />
+      <select class="form-select" style="width:150px">
+        <option>All Status</option><option>Active</option><option>Suspended</option><option>KYC Pending</option>
+      </select>
+      <select class="form-select" style="width:150px">
+        <option>All Plans</option><option>Starter</option><option>Pro</option><option>Business</option>
+      </select>
+      <select class="form-select" style="width:150px">
+        <option>Sort: Newest</option><option>Sort: Oldest</option><option>Sort: Balance ↓</option>
+      </select>
+    </div>
+
+    <!-- USERS TABLE -->
+    <div class="section-card">
+      <table class="table">
+        <thead>
+          <tr>
+            <th><input type="checkbox" style="accent-color:var(--accent)" onchange="toggleAll(this)"></th>
+            <th>User</th><th>Phone</th><th>Plan</th><th>Balance</th><th>Joined</th><th>Status</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="users-table">
+          <tr>
+            <td><input type="checkbox" style="accent-color:var(--accent)"></td>
+            <td><div style="display:flex;align-items:center;gap:10px"><div class="avatar">MA</div><div><div style="color:var(--text);font-weight:600;font-size:14px">Muhammad Auwal</div><div style="font-size:12px;color:var(--text3)">auwal@ajosdata.com</div></div></div></td>
+            <td style="font-family:var(--font-mono);font-size:13px">0801234567</td>
+            <td><span class="badge" style="background:rgba(108,99,255,0.1);color:var(--accent)">Business</span></td>
+            <td style="font-family:var(--font-mono);color:var(--green)">₦45,820</td>
+            <td>Jan 2025</td>
+            <td><span class="badge badge-success">Active</span></td>
+            <td><div style="display:flex;gap:4px">
+              <button class="btn-icon" style="font-size:11px" onclick="viewUser('Muhammad Auwal')">View</button>
+              <button class="btn-icon" style="font-size:11px" onclick="creditWallet('Muhammad Auwal')">💰 Credit</button>
+              <button class="btn-icon" style="font-size:11px;color:var(--orange)" onclick="suspendUser(this)">Suspend</button>
+            </div></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" style="accent-color:var(--accent)"></td>
+            <td><div style="display:flex;align-items:center;gap:10px"><div class="avatar" style="background:linear-gradient(135deg,var(--green),var(--blue))">AY</div><div><div style="color:var(--text);font-weight:600;font-size:14px">Amina Yusuf</div><div style="font-size:12px;color:var(--text3)">amina@gmail.com</div></div></div></td>
+            <td style="font-family:var(--font-mono);font-size:13px">0809876543</td>
+            <td><span class="badge" style="background:rgba(34,211,165,0.1);color:var(--green)">Pro</span></td>
+            <td style="font-family:var(--font-mono);color:var(--green)">₦12,400</td>
+            <td>Mar 2025</td>
+            <td><span class="badge badge-success">Active</span></td>
+            <td><div style="display:flex;gap:4px">
+              <button class="btn-icon" style="font-size:11px" onclick="viewUser('Amina Yusuf')">View</button>
+              <button class="btn-icon" style="font-size:11px" onclick="creditWallet('Amina Yusuf')">💰 Credit</button>
+              <button class="btn-icon" style="font-size:11px;color:var(--orange)" onclick="suspendUser(this)">Suspend</button>
+            </div></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" style="accent-color:var(--accent)"></td>
+            <td><div style="display:flex;align-items:center;gap:10px"><div class="avatar" style="background:linear-gradient(135deg,var(--orange),var(--red))">CE</div><div><div style="color:var(--text);font-weight:600;font-size:14px">Chioma Eze</div><div style="font-size:12px;color:var(--text3)">chioma@mail.com</div></div></div></td>
+            <td style="font-family:var(--font-mono);font-size:13px">0701122334</td>
+            <td><span class="badge" style="background:rgba(255,255,255,0.05);color:var(--text3)">Starter</span></td>
+            <td style="font-family:var(--font-mono);color:var(--text2)">₦500</td>
+            <td>Today</td>
+            <td><span class="badge badge-pending">KYC Pending</span></td>
+            <td><div style="display:flex;gap:4px">
+              <button class="btn-icon" style="font-size:11px" onclick="viewUser('Chioma Eze')">View</button>
+              <button class="btn-icon" style="font-size:11px;color:var(--green)" onclick="approveKYC('Chioma Eze')">✓ KYC</button>
+              <button class="btn-icon" style="font-size:11px;color:var(--orange)" onclick="suspendUser(this)">Suspend</button>
+            </div></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" style="accent-color:var(--accent)"></td>
+            <td><div style="display:flex;align-items:center;gap:10px"><div class="avatar" style="background:linear-gradient(135deg,var(--blue),var(--accent))">BM</div><div><div style="color:var(--text);font-weight:600;font-size:14px">Bashir Musa</div><div style="font-size:12px;color:var(--text3)">bashir@yahoo.com</div></div></div></td>
+            <td style="font-family:var(--font-mono);font-size:13px">0811223344</td>
+            <td><span class="badge" style="background:rgba(34,211,165,0.1);color:var(--green)">Pro</span></td>
+            <td style="font-family:var(--font-mono);color:var(--green)">₦8,200</td>
+            <td>Apr 2025</td>
+            <td><span class="badge badge-failed">Suspended</span></td>
+            <td><div style="display:flex;gap:4px">
+              <button class="btn-icon" style="font-size:11px" onclick="viewUser('Bashir Musa')">View</button>
+              <button class="btn-icon" style="font-size:11px;color:var(--green)" onclick="unsuspendUser(this)">Unsuspend</button>
+            </div></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="padding:16px 24px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border)">
+        <span style="font-size:13px;color:var(--text3)">Showing 4 of 180,432</span>
+        <div style="display:flex;gap:8px">
+          <button class="btn-icon">← Prev</button>
+          <button class="btn-icon" style="background:var(--accent);color:#fff;border-color:var(--accent)">1</button>
+          <button class="btn-icon">2</button><button class="btn-icon">3</button>
+          <button class="btn-icon">Next →</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- CREATE USER MODAL -->
+<div class="modal-overlay" id="create-user-modal" onclick="if(event.target===this)closeModal('create-user-modal')">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+      <h3 style="font-family:var(--font-display);font-size:20px;font-weight:700">Create User</h3>
+      <button style="background:none;border:none;color:var(--text3);font-size:20px;cursor:pointer" onclick="closeModal('create-user-modal')">✕</button>
+    </div>
+    <form onsubmit="createUser(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="form-group"><label class="form-label">First Name</label><input class="form-input" type="text" placeholder="First Name" required /></div>
+        <div class="form-group"><label class="form-label">Last Name</label><input class="form-input" type="text" placeholder="Last Name" required /></div>
+      </div>
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="email@example.com" required /></div>
+      <div class="form-group"><label class="form-label">Phone</label><input class="form-input" type="tel" placeholder="080XXXXXXXXX" required /></div>
+      <div class="form-group"><label class="form-label">Plan</label>
+        <select class="form-select"><option>Starter</option><option>Pro</option><option>Business</option></select>
+      </div>
+      <div class="form-group"><label class="form-label">Initial Wallet Balance (₦)</label><input class="form-input" type="number" placeholder="0" min="0" /></div>
+      <div style="display:flex;gap:10px;margin-top:8px">
+        <button type="button" class="btn-outline" style="flex:1" onclick="closeModal('create-user-modal')">Cancel</button>
+        <button type="submit" class="btn-primary" style="flex:1">Create User</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- CREDIT WALLET MODAL -->
+<div class="modal-overlay" id="credit-modal" onclick="if(event.target===this)closeModal('credit-modal')">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+      <h3 style="font-family:var(--font-display);font-size:20px;font-weight:700">Credit Wallet</h3>
+      <button style="background:none;border:none;color:var(--text3);font-size:20px;cursor:pointer" onclick="closeModal('credit-modal')">✕</button>
+    </div>
+    <p style="color:var(--text2);font-size:14px;margin-bottom:20px">Manually credit wallet for: <strong id="credit-user-name" style="color:var(--text)"></strong></p>
+    <form onsubmit="submitCredit(event)">
+      <div class="form-group"><label class="form-label">Amount (₦)</label><div class="input-group"><span class="input-prefix">₦</span><input class="form-input" type="number" placeholder="Enter amount" min="1" required /></div></div>
+      <div class="form-group"><label class="form-label">Reason</label><input class="form-input" type="text" placeholder="e.g. Compensation, Refund, Bonus" required /></div>
+      <div style="display:flex;gap:10px;margin-top:8px">
+        <button type="button" class="btn-outline" style="flex:1" onclick="closeModal('credit-modal')">Cancel</button>
+        <button type="submit" class="btn-primary" style="flex:1">Credit Wallet</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="/zelvapay/js/main.js"></script>
+<script>
+function openModal(id) { document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+function viewUser(name) { showToast('Opening profile for ' + name, 'success'); }
+function creditWallet(name) { document.getElementById('credit-user-name').textContent = name; openModal('credit-modal'); }
+function suspendUser(btn) {
+  if (confirm('Suspend this user? They will lose access to their account.')) {
+    btn.textContent = 'Unsuspend'; btn.style.color = 'var(--green)';
+    btn.onclick = () => unsuspendUser(btn);
+    showToast('User suspended', 'success');
+  }
+}
+function unsuspendUser(btn) {
+  btn.textContent = 'Suspend'; btn.style.color = 'var(--orange)';
+  btn.onclick = () => suspendUser(btn);
+  showToast('User account restored', 'success');
+}
+function approveKYC(name) { showToast(name + ' KYC approved ✓', 'success'); }
+function toggleAll(master) { document.querySelectorAll('tbody input[type=checkbox]').forEach(cb => cb.checked = master.checked); }
+function createUser(e) {
+  e.preventDefault(); closeModal('create-user-modal');
+  showToast('User created and login details sent via email', 'success');
+}
+function submitCredit(e) {
+  e.preventDefault(); closeModal('credit-modal');
+  showToast('Wallet credited successfully', 'success');
+}
+</script>
+</body>
+</html>

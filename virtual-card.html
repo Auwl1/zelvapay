@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Cards — ZelvaPay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/zelvapay/css/main.css" />
+</head>
+<body>
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="/zelvapay/index.html" class="nav-logo" style="font-family:var(--font-display);font-size:20px;font-weight:800;">Zelva<span style="color:var(--accent)">Pay</span></a>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="/zelvapay/pages/dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a>
+      <a href="/zelvapay/pages/data.html"><span class="nav-icon">📶</span> Buy Data</a>
+      <a href="/zelvapay/pages/airtime.html"><span class="nav-icon">📱</span> Buy Airtime</a>
+      <a href="/zelvapay/pages/electricity.html"><span class="nav-icon">⚡</span> Electricity</a>
+      <a href="/zelvapay/pages/cable.html"><span class="nav-icon">📺</span> Cable TV</a>
+      <a href="/zelvapay/pages/virtual-card.html" class="active"><span class="nav-icon">💳</span> Virtual Cards</a>
+      <a href="/zelvapay/pages/giftcard.html"><span class="nav-icon">🎁</span> Gift Cards</a>
+      <a href="/zelvapay/pages/transfer.html"><span class="nav-icon">🏦</span> Transfer</a>
+      <a href="/zelvapay/pages/transactions.html"><span class="nav-icon">📋</span> Transactions</a>
+      <a href="/zelvapay/pages/api-settings.html"><span class="nav-icon">🔑</span> API Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <div class="user-avatar">MA</div>
+        <div><div class="user-name">Muhammad Auwal</div></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Virtual Cards</h1>
+        <p class="page-sub">Create USD & Naira virtual cards for online payments and subscriptions.</p>
+      </div>
+      <button class="btn-primary" onclick="showCreateCard()">+ Create New Card</button>
+    </div>
+
+    <!-- CARDS DISPLAY -->
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:32px;align-items:flex-start">
+
+      <!-- USD CARD -->
+      <div>
+        <div class="vcard">
+          <div class="vcard-network">💳</div>
+          <div class="vcard-type">ZelvaPay USD Virtual Card</div>
+          <div class="vcard-chip">💿</div>
+          <div class="vcard-number">4111 •••• •••• 7842</div>
+          <div class="vcard-details">
+            <div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px">Card Holder</div>
+              <div class="vcard-holder">Muhammad Auwal</div>
+            </div>
+            <div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px">Expires</div>
+              <div class="vcard-expiry">12/27</div>
+            </div>
+          </div>
+          <div class="vcard-balance">
+            <div class="vcard-bal-label">Balance</div>
+            <div class="vcard-bal-amount">$45.00</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button class="btn-icon" onclick="showToast('Card number: 4111 8923 4456 7842', 'success')">👁 Reveal</button>
+          <button class="btn-icon" onclick="fundCard()">+ Fund</button>
+          <button class="btn-icon" style="color:var(--red)" onclick="freezeCard()">❄ Freeze</button>
+          <button class="btn-icon" style="color:var(--red)" onclick="deleteCard()">🗑</button>
+        </div>
+      </div>
+
+      <!-- NGN CARD -->
+      <div>
+        <div class="vcard" style="background:linear-gradient(135deg,#0a2622,#0d3326,#0f4a35)">
+          <div class="vcard-network">🟢</div>
+          <div class="vcard-type">ZelvaPay Naira Virtual Card</div>
+          <div class="vcard-chip">💿</div>
+          <div class="vcard-number">5399 •••• •••• 3310</div>
+          <div class="vcard-details">
+            <div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px">Card Holder</div>
+              <div class="vcard-holder">Muhammad Auwal</div>
+            </div>
+            <div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px">Expires</div>
+              <div class="vcard-expiry">08/28</div>
+            </div>
+          </div>
+          <div class="vcard-balance">
+            <div class="vcard-bal-label">Balance</div>
+            <div class="vcard-bal-amount">₦12,500</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button class="btn-icon" onclick="showToast('Card number: 5399 2218 9945 3310', 'success')">👁 Reveal</button>
+          <button class="btn-icon" onclick="fundCard()">+ Fund</button>
+          <button class="btn-icon" style="color:var(--red)">❄ Freeze</button>
+          <button class="btn-icon" style="color:var(--red)">🗑</button>
+        </div>
+      </div>
+
+      <!-- CREATE CARD -->
+      <div id="create-card-form" style="display:none">
+        <div class="section-card" style="width:320px">
+          <div class="section-card-header"><span class="section-card-title">Create Virtual Card</span></div>
+          <div style="padding:24px">
+            <form onsubmit="submitForm(event, 'Virtual card created successfully! 💳')">
+              <div class="form-group">
+                <label class="form-label">Card Currency</label>
+                <select class="form-select">
+                  <option value="usd">USD — Dollar Card</option>
+                  <option value="ngn">NGN — Naira Card</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Card Label</label>
+                <input class="form-input" type="text" placeholder="e.g. Netflix Card, Shopping" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Initial Funding Amount</label>
+                <div class="input-group">
+                  <span class="input-prefix">₦</span>
+                  <input class="form-input" type="number" placeholder="1000" min="500" />
+                </div>
+                <p class="form-hint">Minimum ₦500. Creation fee: ₦200</p>
+              </div>
+              <button type="submit" class="btn-primary btn-full">Create Card</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD TRANSACTIONS -->
+    <div class="section-card">
+      <div class="section-card-header">
+        <span class="section-card-title">Card Transactions</span>
+      </div>
+      <table class="table">
+        <thead>
+          <tr><th>Card</th><th>Description</th><th>Date</th><th>Amount</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span style="font-family:var(--font-mono);font-size:12px">••7842</span></td>
+            <td>Netflix Subscription</td>
+            <td>Today</td>
+            <td style="color:var(--red);font-family:var(--font-mono)">-$15.99</td>
+            <td><span class="badge badge-success">Success</span></td>
+          </tr>
+          <tr>
+            <td><span style="font-family:var(--font-mono);font-size:12px">••7842</span></td>
+            <td>ChatGPT Plus</td>
+            <td>Yesterday</td>
+            <td style="color:var(--red);font-family:var(--font-mono)">-$20.00</td>
+            <td><span class="badge badge-success">Success</span></td>
+          </tr>
+          <tr>
+            <td><span style="font-family:var(--font-mono);font-size:12px">••3310</span></td>
+            <td>Card Funding</td>
+            <td>2 days ago</td>
+            <td style="color:var(--green);font-family:var(--font-mono)">+₦12,500</td>
+            <td><span class="badge badge-success">Success</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+<script src="/zelvapay/js/main.js"></script>
+<script>
+function showCreateCard() {
+  const f = document.getElementById('create-card-form');
+  f.style.display = f.style.display === 'none' ? 'block' : 'none';
+}
+function fundCard() { showToast('Enter amount to fund this card', 'success'); }
+function freezeCard() { showToast('Card frozen. Tap again to unfreeze.', 'success'); }
+function deleteCard() {
+  if (confirm('Are you sure you want to delete this card? This cannot be undone.')) {
+    showToast('Card deleted successfully', 'success');
+  }
+}
+</script>
+</body>
+</html>

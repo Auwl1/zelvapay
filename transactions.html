@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transactions — ZelvaPay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/zelvapay/css/main.css" />
+</head>
+<body>
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><a href="/zelvapay/index.html" class="nav-logo" style="font-family:var(--font-display);font-size:20px;font-weight:800;">Zelva<span style="color:var(--accent)">Pay</span></a></div>
+    <nav class="sidebar-nav">
+      <a href="/zelvapay/pages/dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a>
+      <a href="/zelvapay/pages/data.html"><span class="nav-icon">📶</span> Buy Data</a>
+      <a href="/zelvapay/pages/airtime.html"><span class="nav-icon">📱</span> Buy Airtime</a>
+      <a href="/zelvapay/pages/electricity.html"><span class="nav-icon">⚡</span> Electricity</a>
+      <a href="/zelvapay/pages/cable.html"><span class="nav-icon">📺</span> Cable TV</a>
+      <a href="/zelvapay/pages/virtual-card.html"><span class="nav-icon">💳</span> Virtual Cards</a>
+      <a href="/zelvapay/pages/giftcard.html"><span class="nav-icon">🎁</span> Gift Cards</a>
+      <a href="/zelvapay/pages/transfer.html"><span class="nav-icon">🏦</span> Transfer</a>
+      <a href="/zelvapay/pages/transactions.html" class="active"><span class="nav-icon">📋</span> Transactions</a>
+      <a href="/zelvapay/pages/api-settings.html"><span class="nav-icon">🔑</span> API Settings</a>
+    </nav>
+    <div class="sidebar-footer"><div class="user-info"><div class="user-avatar">MA</div><div><div class="user-name">Muhammad Auwal</div></div></div></div>
+  </aside>
+  <main class="main-content">
+    <div class="page-header">
+      <div><h1 class="page-title">Transactions</h1><p class="page-sub">Your complete transaction history</p></div>
+      <button class="btn-outline" onclick="showToast('Downloading CSV...', 'success')">⬇ Export CSV</button>
+    </div>
+
+    <!-- FILTERS -->
+    <div style="display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap">
+      <input class="form-input" type="search" placeholder="🔍 Search transactions..." style="max-width:280px" />
+      <select class="form-select" style="width:160px">
+        <option>All Types</option>
+        <option>Data</option><option>Airtime</option><option>Electricity</option>
+        <option>Cable TV</option><option>Transfer</option><option>Gift Card</option>
+        <option>Virtual Card</option><option>Wallet Funding</option>
+      </select>
+      <select class="form-select" style="width:140px">
+        <option>All Status</option>
+        <option>Successful</option><option>Pending</option><option>Failed</option>
+      </select>
+      <input class="form-input" type="date" style="width:160px" />
+      <input class="form-input" type="date" style="width:160px" />
+    </div>
+
+    <div class="section-card">
+      <table class="table">
+        <thead>
+          <tr><th>Description</th><th>Type</th><th>Reference</th><th>Date</th><th>Amount</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong style="color:var(--text)">MTN 10GB Data</strong><br/><small>08012345678</small></td><td>Data</td><td><span style="font-family:var(--font-mono);font-size:11px">ZLV-2839XY</span></td><td>30 May 2026, 9:30am</td><td style="color:var(--red);font-family:var(--font-mono)">-₦2,000</td><td><span class="badge badge-success">Success</span></td></tr>
+          <tr><td><strong style="color:var(--text)">Wallet Funding</strong><br/><small>Monnify</small></td><td>Funding</td><td><span style="font-family:var(--font-mono);font-size:11px">ZLV-1A2B3C</span></td><td>30 May 2026, 8:12am</td><td style="color:var(--green);font-family:var(--font-mono)">+₦10,000</td><td><span class="badge badge-success">Success</span></td></tr>
+          <tr><td><strong style="color:var(--text)">EKEDC Prepaid Token</strong><br/><small>Meter: 6201001234</small></td><td>Electricity</td><td><span style="font-family:var(--font-mono);font-size:11px">ZLV-9XYZ01</span></td><td>29 May 2026</td><td style="color:var(--red);font-family:var(--font-mono)">-₦5,000</td><td><span class="badge badge-success">Success</span></td></tr>
+          <tr><td><strong style="color:var(--text)">Airtel 500 Airtime</strong><br/><small>07098765432</small></td><td>Airtime</td><td><span style="font-family:var(--font-mono);font-size:11px">ZLV-00AB88</span></td><td>29 May 2026</td><td style="color:var(--red);font-family:var(--font-mono)">-₦500</td><td><span class="badge badge-success">Success</span></td></tr>
+          <tr><td><strong style="color:var(--text)">Amazon Gift Card $10</strong><br/><small>USD Gift Card</small></td><td>Gift Card</td><td><span style="font-family:var(--font-mono);font-size:11px">ZLV-GFT441</span></td><td>28 May 2026</td><td style="color:var(--red);font-family:var(--font-mono)">-₦15,600</td><td><span class="badge badge-pending">Pending</span></td></tr>
+          <tr><td><strong style="color:var(--text)">GTBank Transfer</strong><br/><small>Acc: 0123456789</small></td><td>Transfer</td><td><span style="font-family:var(--font-mono);font-size:11px">ZLV-TRF228</span></td><td>27 May 2026</td><td style="color:var(--red);font-family:var(--font-mono)">-₦20,000</td><td><span class="badge badge-success">Success</span></td></tr>
+          <tr><td><strong style="color:var(--text)">DSTv Compact</strong><br/><small>IUC: 1234567890</small></td><td>Cable TV</td><td><span style="font-family:var(--font-mono);font-size:11px">ZLV-DTV991</span></td><td>25 May 2026</td><td style="color:var(--red);font-family:var(--font-mono)">-₦10,500</td><td><span class="badge badge-success">Success</span></td></tr>
+          <tr><td><strong style="color:var(--text)">Netflix Card Funding</strong><br/><small>Virtual Card ••7842</small></td><td>Card Fund</td><td><span style="font-family:var(--font-mono);font-size:11px">ZLV-CRD003</span></td><td>24 May 2026</td><td style="color:var(--red);font-family:var(--font-mono)">-₦8,000</td><td><span class="badge badge-success">Success</span></td></tr>
+          <tr><td><strong style="color:var(--text)">Wallet Funding</strong><br/><small>Paystack</small></td><td>Funding</td><td><span style="font-family:var(--font-mono);font-size:11px">ZLV-FND772</span></td><td>20 May 2026</td><td style="color:var(--green);font-family:var(--font-mono)">+₦50,000</td><td><span class="badge badge-success">Success</span></td></tr>
+          <tr><td><strong style="color:var(--text)">Glo 2GB Data</strong><br/><small>08100000001</small></td><td>Data</td><td><span style="font-family:var(--font-mono);font-size:11px">ZLV-GLO229</span></td><td>18 May 2026</td><td style="color:var(--red);font-family:var(--font-mono)">-₦500</td><td><span class="badge badge-failed">Failed</span></td></tr>
+        </tbody>
+      </table>
+      <div style="padding:20px 24px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border)">
+        <span style="font-size:13px;color:var(--text3)">Showing 10 of 248 transactions</span>
+        <div style="display:flex;gap:8px">
+          <button class="btn-icon">← Prev</button>
+          <button class="btn-icon" style="background:var(--accent);color:#fff;border-color:var(--accent)">1</button>
+          <button class="btn-icon">2</button>
+          <button class="btn-icon">3</button>
+          <button class="btn-icon">Next →</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="/zelvapay/js/main.js"></script>
+</body>
+</html>

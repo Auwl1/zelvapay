@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gift Cards — ZelvaPay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/zelvapay/css/main.css" />
+</head>
+<body>
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="/zelvapay/index.html" class="nav-logo" style="font-family:var(--font-display);font-size:20px;font-weight:800;">Zelva<span style="color:var(--accent)">Pay</span></a>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="/zelvapay/pages/dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a>
+      <a href="/zelvapay/pages/data.html"><span class="nav-icon">📶</span> Buy Data</a>
+      <a href="/zelvapay/pages/airtime.html"><span class="nav-icon">📱</span> Buy Airtime</a>
+      <a href="/zelvapay/pages/electricity.html"><span class="nav-icon">⚡</span> Electricity</a>
+      <a href="/zelvapay/pages/cable.html"><span class="nav-icon">📺</span> Cable TV</a>
+      <a href="/zelvapay/pages/virtual-card.html"><span class="nav-icon">💳</span> Virtual Cards</a>
+      <a href="/zelvapay/pages/giftcard.html" class="active"><span class="nav-icon">🎁</span> Gift Cards</a>
+      <a href="/zelvapay/pages/transfer.html"><span class="nav-icon">🏦</span> Transfer</a>
+      <a href="/zelvapay/pages/transactions.html"><span class="nav-icon">📋</span> Transactions</a>
+      <a href="/zelvapay/pages/api-settings.html"><span class="nav-icon">🔑</span> API Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <div class="user-avatar">MA</div>
+        <div><div class="user-name">Muhammad Auwal</div></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Gift Cards</h1>
+        <p class="page-sub">Buy & redeem gift cards from 50+ global brands.</p>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab(this,'tab-buy')">Buy Gift Card</button>
+      <button class="tab" onclick="switchTab(this,'tab-redeem')">Redeem / Sell</button>
+      <button class="tab" onclick="switchTab(this,'tab-history')">History</button>
+    </div>
+
+    <!-- BUY TAB -->
+    <div id="tab-buy">
+      <div style="margin-bottom:20px">
+        <input class="form-input" type="search" placeholder="🔍 Search brands — Amazon, iTunes, Steam..." style="max-width:400px" />
+      </div>
+
+      <div class="gift-grid" style="margin-bottom:32px">
+        <div class="gift-card selected" onclick="selectGiftCard(this)">
+          <div class="gift-icon">🛒</div>
+          <div class="gift-name">Amazon</div>
+          <div class="gift-rate">$1 = ₦1,560</div>
+        </div>
+        <div class="gift-card" onclick="selectGiftCard(this)">
+          <div class="gift-icon">🍎</div>
+          <div class="gift-name">iTunes</div>
+          <div class="gift-rate">$1 = ₦1,540</div>
+        </div>
+        <div class="gift-card" onclick="selectGiftCard(this)">
+          <div class="gift-icon">🎮</div>
+          <div class="gift-name">Steam</div>
+          <div class="gift-rate">$1 = ₦1,520</div>
+        </div>
+        <div class="gift-card" onclick="selectGiftCard(this)">
+          <div class="gift-icon">🎮</div>
+          <div class="gift-name">PlayStation</div>
+          <div class="gift-rate">$1 = ₦1,530</div>
+        </div>
+        <div class="gift-card" onclick="selectGiftCard(this)">
+          <div class="gift-icon">🎯</div>
+          <div class="gift-name">Xbox</div>
+          <div class="gift-rate">$1 = ₦1,510</div>
+        </div>
+        <div class="gift-card" onclick="selectGiftCard(this)">
+          <div class="gift-icon">🔵</div>
+          <div class="gift-name">Google Play</div>
+          <div class="gift-rate">$1 = ₦1,550</div>
+        </div>
+        <div class="gift-card" onclick="selectGiftCard(this)">
+          <div class="gift-icon">🎵</div>
+          <div class="gift-name">Spotify</div>
+          <div class="gift-rate">$1 = ₦1,500</div>
+        </div>
+        <div class="gift-card" onclick="selectGiftCard(this)">
+          <div class="gift-icon">🎬</div>
+          <div class="gift-name">Netflix</div>
+          <div class="gift-rate">$1 = ₦1,520</div>
+        </div>
+        <div class="gift-card" onclick="selectGiftCard(this)">
+          <div class="gift-icon">🛍</div>
+          <div class="gift-name">Walmart</div>
+          <div class="gift-rate">$1 = ₦1,555</div>
+        </div>
+        <div class="gift-card" onclick="selectGiftCard(this)">
+          <div class="gift-icon">🍔</div>
+          <div class="gift-name">Chipotle</div>
+          <div class="gift-rate">$1 = ₦1,500</div>
+        </div>
+        <div class="gift-card" onclick="selectGiftCard(this)">
+          <div class="gift-icon">🏪</div>
+          <div class="gift-name">eBay</div>
+          <div class="gift-rate">$1 = ₦1,540</div>
+        </div>
+        <div class="gift-card" onclick="selectGiftCard(this)">
+          <div class="gift-icon">☁️</div>
+          <div class="gift-name">Adobe</div>
+          <div class="gift-rate">$1 = ₦1,510</div>
+        </div>
+      </div>
+
+      <div class="section-card" style="max-width:480px">
+        <div class="section-card-header"><span class="section-card-title">Purchase Details</span></div>
+        <div style="padding:24px">
+          <form onsubmit="submitForm(event, 'Gift card purchased! Check your email 🎁')">
+            <input type="hidden" id="selected-giftcard" value="Amazon" />
+            <div class="form-group">
+              <label class="form-label">Selected Brand</label>
+              <input class="form-input" id="brand-display" value="Amazon" readonly style="color:var(--accent);font-weight:600" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Amount (USD)</label>
+              <select class="form-select" id="gift-amount" onchange="calcGiftPrice()">
+                <option value="5">$5</option>
+                <option value="10" selected>$10</option>
+                <option value="25">$25</option>
+                <option value="50">$50</option>
+                <option value="100">$100</option>
+                <option value="200">$200</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Quantity</label>
+              <input class="form-input" type="number" value="1" min="1" max="10" id="gift-qty" onchange="calcGiftPrice()" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Delivery Email</label>
+              <input class="form-input" type="email" placeholder="recipient@email.com" />
+            </div>
+            <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:16px;margin-bottom:20px">
+              <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:8px">
+                <span style="color:var(--text3)">Rate</span>
+                <span style="font-family:var(--font-mono)">$1 = ₦1,560</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:8px">
+                <span style="color:var(--text3)">Card Value</span>
+                <span style="font-family:var(--font-mono)" id="gift-usd">$10.00</span>
+              </div>
+              <div style="border-top:1px solid var(--border);padding-top:10px;display:flex;justify-content:space-between;font-size:16px;font-weight:700">
+                <span>Total (NGN)</span>
+                <span style="font-family:var(--font-mono);color:var(--accent)" id="gift-ngn">₦15,600</span>
+              </div>
+            </div>
+            <button type="submit" class="btn-primary btn-full" style="padding:16px">Buy Gift Card</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- REDEEM TAB -->
+    <div id="tab-redeem" style="display:none;max-width:480px">
+      <div class="section-card">
+        <div class="section-card-header"><span class="section-card-title">Sell / Redeem Gift Card</span></div>
+        <div style="padding:24px">
+          <form onsubmit="submitForm(event, 'Gift card submitted for review. Payment in 5 minutes!')">
+            <div class="form-group">
+              <label class="form-label">Card Brand</label>
+              <select class="form-select">
+                <option>Amazon</option><option>iTunes</option><option>Steam</option>
+                <option>Google Play</option><option>Xbox</option><option>PlayStation</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Card Code</label>
+              <input class="form-input" type="text" placeholder="XXXX-XXXX-XXXX-XXXX" style="font-family:var(--font-mono);letter-spacing:2px" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Card Value (USD)</label>
+              <input class="form-input" type="number" placeholder="e.g. 25" />
+            </div>
+            <div style="background:rgba(34,211,165,0.05);border:1px solid rgba(34,211,165,0.2);border-radius:var(--radius-sm);padding:14px;margin-bottom:20px;font-size:13px;color:var(--text2)">
+              💡 You'll receive NGN equivalent at our current buy rate directly to your ZelvaPay wallet.
+            </div>
+            <button type="submit" class="btn-primary btn-full">Submit for Review</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- HISTORY TAB -->
+    <div id="tab-history" style="display:none">
+      <div class="section-card">
+        <div class="section-card-header"><span class="section-card-title">Gift Card History</span></div>
+        <table class="table">
+          <thead><tr><th>Brand</th><th>Type</th><th>Value</th><th>NGN</th><th>Date</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Amazon</td><td>Buy</td>
+              <td style="font-family:var(--font-mono)">$10</td>
+              <td style="color:var(--red);font-family:var(--font-mono)">-₦15,600</td>
+              <td>Today</td>
+              <td><span class="badge badge-success">Delivered</span></td>
+            </tr>
+            <tr>
+              <td>iTunes</td><td>Sell</td>
+              <td style="font-family:var(--font-mono)">$25</td>
+              <td style="color:var(--green);font-family:var(--font-mono)">+₦36,000</td>
+              <td>3 days ago</td>
+              <td><span class="badge badge-success">Paid</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+<script src="/zelvapay/js/main.js"></script>
+<script>
+function calcGiftPrice() {
+  const amt = Number(document.getElementById('gift-amount').value);
+  const qty = Number(document.getElementById('gift-qty').value) || 1;
+  const rate = 1560;
+  document.getElementById('gift-usd').textContent = '$' + (amt * qty).toFixed(2);
+  document.getElementById('gift-ngn').textContent = '₦' + (amt * qty * rate).toLocaleString();
+}
+document.querySelectorAll('.gift-card').forEach(c => {
+  c.addEventListener('click', function () {
+    document.getElementById('brand-display').value = this.querySelector('.gift-name').textContent;
+  });
+});
+</script>
+</body>
+</html>

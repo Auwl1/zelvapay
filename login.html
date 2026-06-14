@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In — ZelvaPay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/zelvapay/css/main.css" />
+</head>
+<body>
+<div class="auth-page">
+  <!-- LEFT -->
+  <div class="auth-left">
+    <div>
+      <a href="/zelvapay/index.html" class="nav-logo" style="font-family:var(--font-display);font-size:24px;font-weight:800;display:inline-block;margin-bottom:48px;">Zelva<span style="color:var(--accent)">Pay</span></a>
+      <div class="auth-illustration">🚀</div>
+      <h2 class="auth-tagline">Nigeria's fastest<br/><span>digital finance</span><br/>platform.</h2>
+      <p class="auth-desc" style="margin-top:16px">Buy data, airtime, pay bills, manage virtual cards and gift cards — all from one dashboard.</p>
+      <div style="margin-top:40px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text2)">
+          <span style="width:28px;height:28px;background:rgba(34,211,165,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--green);font-size:12px">✓</span>
+          Instant data & airtime delivery
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text2)">
+          <span style="width:28px;height:28px;background:rgba(34,211,165,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--green);font-size:12px">✓</span>
+          USD & Naira virtual cards
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text2)">
+          <span style="width:28px;height:28px;background:rgba(34,211,165,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--green);font-size:12px">✓</span>
+          50+ gift card brands
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text2)">
+          <span style="width:28px;height:28px;background:rgba(34,211,165,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--green);font-size:12px">✓</span>
+          Developer API access
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="auth-right">
+    <div style="max-width:400px;width:100%">
+      <div class="tabs" style="margin-bottom:32px">
+        <button class="tab active" onclick="switchTab(this,'tab-login')">Sign In</button>
+        <button class="tab" onclick="switchTab(this,'tab-register')">Create Account</button>
+      </div>
+
+      <!-- LOGIN -->
+      <div id="tab-login">
+        <h2 class="form-title">Welcome back</h2>
+        <p class="form-sub">Sign in to your ZelvaPay account</p>
+        <form onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input class="form-input" type="email" placeholder="you@example.com" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input class="form-input" type="password" placeholder="••••••••••" required />
+            <p class="form-hint" style="text-align:right"><a href="#" style="color:var(--accent)">Forgot password?</a></p>
+          </div>
+          <button type="submit" class="btn-primary btn-full" style="padding:16px;margin-top:8px">Sign In</button>
+          <div class="form-divider">or</div>
+          <button type="button" class="btn-outline btn-full" onclick="showToast('Google login coming soon', 'success')">
+            🌐 Continue with Google
+          </button>
+        </form>
+      </div>
+
+      <!-- REGISTER -->
+      <div id="tab-register" style="display:none">
+        <h2 class="form-title">Create account</h2>
+        <p class="form-sub">Join 180,000+ ZelvaPay users today</p>
+        <form onsubmit="handleRegister(event)">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input class="form-input" type="text" placeholder="Muhammad" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input class="form-input" type="text" placeholder="Auwal" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input class="form-input" type="email" placeholder="you@example.com" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input class="form-input" type="tel" placeholder="080XXXXXXXXX" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input class="form-input" type="password" placeholder="Min. 8 characters" minlength="8" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Referral Code <span style="color:var(--text3)">(Optional)</span></label>
+            <input class="form-input" type="text" placeholder="Enter referral code" />
+          </div>
+          <div style="margin-bottom:20px">
+            <label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--text2);cursor:pointer">
+              <input type="checkbox" required style="accent-color:var(--accent);margin-top:2px">
+              I agree to ZelvaPay's <a href="#" style="color:var(--accent)">Terms of Service</a> and <a href="#" style="color:var(--accent)">Privacy Policy</a>
+            </label>
+          </div>
+          <button type="submit" class="btn-primary btn-full" style="padding:16px">Create Account</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="/zelvapay/js/main.js"></script>
+<script>
+function handleLogin(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('[type="submit"]');
+  btn.textContent = 'Signing in...';
+  btn.disabled = true;
+  setTimeout(() => { window.location.href = '/zelvapay/pages/dashboard.html'; }, 1500);
+}
+function handleRegister(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('[type="submit"]');
+  btn.textContent = 'Creating account...';
+  btn.disabled = true;
+  setTimeout(() => { window.location.href = '/zelvapay/pages/dashboard.html'; }, 1800);
+}
+</script>
+</body>
+</html>

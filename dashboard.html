@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — ZelvaPay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/zelvapay/css/main.css" />
+</head>
+<body>
+
+<div class="dashboard-layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="/zelvapay/index.html" class="nav-logo" style="font-family:var(--font-display);font-size:20px;font-weight:800;">Zelva<span style="color:var(--accent)">Pay</span></a>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="/zelvapay/pages/dashboard.html" class="active"><span class="nav-icon">🏠</span> Dashboard</a>
+      <a href="/zelvapay/pages/data.html"><span class="nav-icon">📶</span> Buy Data</a>
+      <a href="/zelvapay/pages/airtime.html"><span class="nav-icon">📱</span> Buy Airtime</a>
+      <a href="/zelvapay/pages/electricity.html"><span class="nav-icon">⚡</span> Electricity</a>
+      <a href="/zelvapay/pages/cable.html"><span class="nav-icon">📺</span> Cable TV</a>
+      <a href="/zelvapay/pages/virtual-card.html"><span class="nav-icon">💳</span> Virtual Cards</a>
+      <a href="/zelvapay/pages/giftcard.html"><span class="nav-icon">🎁</span> Gift Cards</a>
+      <a href="/zelvapay/pages/transfer.html"><span class="nav-icon">🏦</span> Transfer</a>
+      <a href="/zelvapay/pages/exam.html"><span class="nav-icon">📝</span> Exam Pins</a>
+      <a href="/zelvapay/pages/transactions.html"><span class="nav-icon">📋</span> Transactions</a>
+      <a href="/zelvapay/pages/api-settings.html"><span class="nav-icon">🔑</span> API Settings</a>
+      <a href="/zelvapay/pages/fund-wallet.html"><span class="nav-icon">💰</span> Fund Wallet</a>
+      <a href="/zelvapay/pages/profile.html"><span class="nav-icon">👤</span> Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-info" onclick="window.location='profile.html'">
+        <div class="user-avatar">MA</div>
+        <div>
+          <div class="user-name">Muhammad Auwal</div>
+          <div class="user-email">auwal@ajosdata.com</div>
+        </div>
+        <span style="margin-left:auto;color:var(--text3);">⚙</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Good morning, Auwal 👋</h1>
+        <p class="page-sub">Here's what's happening with your account today.</p>
+      </div>
+      <a href="/zelvapay/pages/fund-wallet.html" class="btn-primary">+ Fund Wallet</a>
+    </div>
+
+    <!-- BALANCE CARDS -->
+    <div class="balance-cards">
+      <div class="balance-card main-bal">
+        <div class="bal-card-label">Wallet Balance</div>
+        <div class="bal-card-amount">₦ 45,820.00</div>
+        <div class="bal-card-sub">Available for transactions</div>
+        <div class="bal-icon">💰</div>
+      </div>
+      <div class="balance-card">
+        <div class="bal-card-label">Total Spent Today</div>
+        <div class="bal-card-amount" style="color:var(--text)">₦ 7,500.00</div>
+        <div class="bal-card-sub" style="color:var(--text3)">3 transactions</div>
+        <div class="bal-icon" style="opacity:0.15">📉</div>
+      </div>
+      <div class="balance-card">
+        <div class="bal-card-label">Cashback Earned</div>
+        <div class="bal-card-amount" style="color:var(--green)">₦ 320.00</div>
+        <div class="bal-card-sub" style="color:var(--text3)">This month</div>
+        <div class="bal-icon" style="opacity:0.15">🎉</div>
+      </div>
+    </div>
+
+    <!-- QUICK ACTIONS -->
+    <div class="quick-actions">
+      <a href="/zelvapay/pages/data.html" class="qa-item"><div class="qa-icon">📶</div><div class="qa-label">Data</div></a>
+      <a href="/zelvapay/pages/airtime.html" class="qa-item"><div class="qa-icon">📱</div><div class="qa-label">Airtime</div></a>
+      <a href="/zelvapay/pages/electricity.html" class="qa-item"><div class="qa-icon">⚡</div><div class="qa-label">Power</div></a>
+      <a href="/zelvapay/pages/cable.html" class="qa-item"><div class="qa-icon">📺</div><div class="qa-label">Cable TV</div></a>
+      <a href="/zelvapay/pages/virtual-card.html" class="qa-item"><div class="qa-icon">💳</div><div class="qa-label">Cards</div></a>
+      <a href="/zelvapay/pages/giftcard.html" class="qa-item"><div class="qa-icon">🎁</div><div class="qa-label">Gift Cards</div></a>
+      <a href="/zelvapay/pages/transfer.html" class="qa-item"><div class="qa-icon">🏦</div><div class="qa-label">Transfer</div></a>
+      <a href="/zelvapay/pages/exam.html" class="qa-item"><div class="qa-icon">📝</div><div class="qa-label">Exam</div></a>
+    </div>
+
+    <!-- RECENT TRANSACTIONS -->
+    <div class="section-card">
+      <div class="section-card-header">
+        <span class="section-card-title">Recent Transactions</span>
+        <a href="/zelvapay/pages/transactions.html" class="btn-ghost" style="font-size:13px;">View all →</a>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Reference</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:var(--text)">MTN 10GB Data</strong><br/><small>08012345678</small></td>
+            <td><span style="font-family:var(--font-mono);font-size:12px">ZLV-2839XY</span></td>
+            <td>Today, 9:30am</td>
+            <td style="color:var(--red);font-family:var(--font-mono)">-₦2,000</td>
+            <td><span class="badge badge-success">Success</span></td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--text)">Wallet Funding</strong><br/><small>Monnify</small></td>
+            <td><span style="font-family:var(--font-mono);font-size:12px">ZLV-1A2B3C</span></td>
+            <td>Today, 8:12am</td>
+            <td style="color:var(--green);font-family:var(--font-mono)">+₦10,000</td>
+            <td><span class="badge badge-success">Success</span></td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--text)">EKEDC Token</strong><br/><small>Meter: 6201001234</small></td>
+            <td><span style="font-family:var(--font-mono);font-size:12px">ZLV-9XYZ01</span></td>
+            <td>Yesterday</td>
+            <td style="color:var(--red);font-family:var(--font-mono)">-₦5,000</td>
+            <td><span class="badge badge-success">Success</span></td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--text)">Airtel Airtime</strong><br/><small>07098765432</small></td>
+            <td><span style="font-family:var(--font-mono);font-size:12px">ZLV-00AB88</span></td>
+            <td>Yesterday</td>
+            <td style="color:var(--red);font-family:var(--font-mono)">-₦500</td>
+            <td><span class="badge badge-success">Success</span></td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--text)">Amazon Gift Card $10</strong><br/><small>USD Gift Card</small></td>
+            <td><span style="font-family:var(--font-mono);font-size:12px">ZLV-GFT441</span></td>
+            <td>2 days ago</td>
+            <td style="color:var(--red);font-family:var(--font-mono)">-₦8,500</td>
+            <td><span class="badge badge-pending">Pending</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<script src="/zelvapay/js/main.js"></script>
+</body>
+</html>

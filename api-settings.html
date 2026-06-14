@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Settings — ZelvaPay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/zelvapay/css/main.css" />
+  <style>
+    .webhook-url {
+      display: flex; gap: 10px; align-items: center;
+      background: var(--bg); border: 1px solid var(--border2);
+      border-radius: var(--radius-sm); padding: 12px 16px;
+    }
+    .webhook-url input {
+      flex: 1; background: none; border: none; outline: none;
+      font-family: var(--font-mono); font-size: 13px; color: var(--text2);
+    }
+    .provider-row {
+      display: flex; align-items: center; gap: 16px;
+      padding: 20px 24px; border-bottom: 1px solid var(--border);
+    }
+    .provider-row:last-child { border: none; }
+    .provider-logo { font-size: 28px; width: 44px; }
+    .provider-name { font-weight: 600; font-size: 15px; flex: 1; }
+    .provider-desc { font-size: 13px; color: var(--text3); flex: 2; }
+    .toggle {
+      position: relative; width: 44px; height: 24px;
+      background: var(--surface2); border-radius: 12px;
+      cursor: pointer; transition: background 0.2s; flex-shrink: 0;
+      border: 1px solid var(--border2);
+    }
+    .toggle.on { background: var(--accent); }
+    .toggle::after {
+      content: ''; position: absolute;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: #fff; top: 2px; left: 2px;
+      transition: left 0.2s;
+    }
+    .toggle.on::after { left: 22px; }
+    .env-selector {
+      display: flex; gap: 8px; margin-bottom: 24px;
+    }
+    .env-btn {
+      padding: 8px 20px; border-radius: 8px; border: 1px solid var(--border2);
+      background: none; color: var(--text2); font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: var(--font-mono); transition: all 0.2s;
+    }
+    .env-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="/zelvapay/index.html" class="nav-logo" style="font-family:var(--font-display);font-size:20px;font-weight:800;">Zelva<span style="color:var(--accent)">Pay</span></a>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="/zelvapay/pages/dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a>
+      <a href="/zelvapay/pages/data.html"><span class="nav-icon">📶</span> Buy Data</a>
+      <a href="/zelvapay/pages/airtime.html"><span class="nav-icon">📱</span> Buy Airtime</a>
+      <a href="/zelvapay/pages/electricity.html"><span class="nav-icon">⚡</span> Electricity</a>
+      <a href="/zelvapay/pages/cable.html"><span class="nav-icon">📺</span> Cable TV</a>
+      <a href="/zelvapay/pages/virtual-card.html"><span class="nav-icon">💳</span> Virtual Cards</a>
+      <a href="/zelvapay/pages/giftcard.html"><span class="nav-icon">🎁</span> Gift Cards</a>
+      <a href="/zelvapay/pages/transfer.html"><span class="nav-icon">🏦</span> Transfer</a>
+      <a href="/zelvapay/pages/transactions.html"><span class="nav-icon">📋</span> Transactions</a>
+      <a href="/zelvapay/pages/api-settings.html" class="active"><span class="nav-icon">🔑</span> API Settings</a>
+      <a href="/zelvapay/pages/fund-wallet.html"><span class="nav-icon">💰</span> Fund Wallet</a>
+      <a href="/zelvapay/pages/profile.html"><span class="nav-icon">👤</span> Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <div class="user-avatar">MA</div>
+        <div><div class="user-name">Muhammad Auwal</div><div class="user-email">auwal@ajosdata.com</div></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">API Settings</h1>
+        <p class="page-sub">Manage your API keys, webhooks, and third-party provider integrations.</p>
+      </div>
+      <button class="btn-primary" onclick="generateKey()">+ Generate New Key</button>
+    </div>
+
+    <!-- ENV SELECTOR -->
+    <div class="env-selector">
+      <button class="env-btn active" onclick="switchEnv(this, 'live')">🟢 Live</button>
+      <button class="env-btn" onclick="switchEnv(this, 'test')">🟠 Test / Sandbox</button>
+    </div>
+
+    <!-- YOUR API KEYS -->
+    <div class="section-card" style="margin-bottom:24px">
+      <div class="section-card-header">
+        <span class="section-card-title">🔑 Your ZelvaPay API Keys</span>
+        <span style="font-size:13px;color:var(--text3)">Keep these secret. Never expose in frontend code.</span>
+      </div>
+      <div style="padding:24px;display:flex;flex-direction:column;gap:16px">
+
+        <div class="api-key-card">
+          <div class="api-key-header">
+            <div>
+              <div class="api-key-name">Secret Key (Live)</div>
+              <div style="font-size:12px;color:var(--text3);margin-top:2px">Full API access</div>
+            </div>
+            <span class="api-key-env env-live">LIVE</span>
+          </div>
+          <div class="api-key-value">
+            <span class="api-key-text" id="key-live-secret">zlv_live_sk_xK9mN2pQ8rT1vW4yA7bC0dE3fG6hJ5iL</span>
+            <button class="btn-icon" onclick="toggleKeyVisibility('key-live-secret', this)">Show</button>
+            <button class="btn-icon" onclick="copyText(document.getElementById('key-live-secret').dataset.full || document.getElementById('key-live-secret').textContent, this)">Copy</button>
+          </div>
+          <div class="api-key-stats">
+            <div class="api-stat"><span class="api-stat-label">Requests Today</span><span class="api-stat-value">1,248</span></div>
+            <div class="api-stat"><span class="api-stat-label">This Month</span><span class="api-stat-value">38,492</span></div>
+            <div class="api-stat"><span class="api-stat-label">Created</span><span class="api-stat-value">Jan 2025</span></div>
+          </div>
+        </div>
+
+        <div class="api-key-card">
+          <div class="api-key-header">
+            <div>
+              <div class="api-key-name">Public Key (Live)</div>
+              <div style="font-size:12px;color:var(--text3);margin-top:2px">Safe to use in frontend</div>
+            </div>
+            <span class="api-key-env env-live">LIVE</span>
+          </div>
+          <div class="api-key-value">
+            <span class="api-key-text" id="key-live-public">zlv_live_pk_4hJ5iL8rT1vW9mN2pQ0dE3fG6xK7bC</span>
+            <button class="btn-icon" onclick="toggleKeyVisibility('key-live-public', this)">Show</button>
+            <button class="btn-icon" onclick="copyText(document.getElementById('key-live-public').dataset.full || document.getElementById('key-live-public').textContent, this)">Copy</button>
+          </div>
+        </div>
+
+        <div class="api-key-card">
+          <div class="api-key-header">
+            <div>
+              <div class="api-key-name">Secret Key (Test)</div>
+              <div style="font-size:12px;color:var(--text3);margin-top:2px">Sandbox — no real transactions</div>
+            </div>
+            <span class="api-key-env env-test">TEST</span>
+          </div>
+          <div class="api-key-value">
+            <span class="api-key-text" id="key-test-secret">zlv_test_sk_T1vW4yA7bC0dE3fG6hJ5iLxK9mN2pQ8r</span>
+            <button class="btn-icon" onclick="toggleKeyVisibility('key-test-secret', this)">Show</button>
+            <button class="btn-icon" onclick="copyText(document.getElementById('key-test-secret').dataset.full || document.getElementById('key-test-secret').textContent, this)">Copy</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- WEBHOOK -->
+    <div class="section-card" style="margin-bottom:24px">
+      <div class="section-card-header">
+        <span class="section-card-title">🔔 Webhook Configuration</span>
+      </div>
+      <div style="padding:24px">
+        <p style="color:var(--text2);font-size:14px;margin-bottom:20px">ZelvaPay will POST transaction events to your URL. Verify using the <code style="background:var(--bg);padding:2px 6px;border-radius:4px;font-family:var(--font-mono);font-size:12px">X-ZelvaPay-Signature</code> header.</p>
+
+        <div class="form-group">
+          <label class="form-label">Webhook URL</label>
+          <div class="webhook-url">
+            <input type="url" id="webhook-url" value="https://yourapp.com/webhook/zelvapay" />
+            <button class="btn-icon" onclick="saveWebhook()">Save</button>
+            <button class="btn-icon" onclick="testWebhook()">Test</button>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top:20px">
+          <label class="form-label" style="margin-bottom:12px">Events to receive</label>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <label style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text2);cursor:pointer">
+              <input type="checkbox" checked style="accent-color:var(--accent)"> <strong style="color:var(--text)">payment.success</strong> — Wallet funding successful
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text2);cursor:pointer">
+              <input type="checkbox" checked style="accent-color:var(--accent)"> <strong style="color:var(--text)">data.purchase</strong> — Data bundle purchased
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text2);cursor:pointer">
+              <input type="checkbox" checked style="accent-color:var(--accent)"> <strong style="color:var(--text)">airtime.purchase</strong> — Airtime top-up completed
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text2);cursor:pointer">
+              <input type="checkbox" style="accent-color:var(--accent)"> <strong style="color:var(--text)">transfer.success</strong> — Bank transfer completed
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text2);cursor:pointer">
+              <input type="checkbox" style="accent-color:var(--accent)"> <strong style="color:var(--text)">card.created</strong> — Virtual card issued
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROVIDER API KEYS -->
+    <div class="section-card">
+      <div class="section-card-header">
+        <span class="section-card-title">🔌 Third-Party Provider API Keys</span>
+        <span style="font-size:13px;color:var(--text3)">Connect your data & payment providers</span>
+      </div>
+      <div style="padding:0">
+
+        <!-- MONNIFY -->
+        <div class="provider-row">
+          <div class="provider-logo">🏦</div>
+          <div style="flex:1">
+            <div class="provider-name">Monnify</div>
+            <div class="provider-desc">Payment gateway — wallet funding via bank transfer & card</div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+              <input class="form-input" type="text" placeholder="API Key (e.g. MK_TEST_XXXXXX)" id="monnify-api-key" style="font-family:var(--font-mono);font-size:13px" />
+              <input class="form-input" type="password" placeholder="Secret Key" id="monnify-secret-key" style="font-family:var(--font-mono);font-size:13px" />
+              <input class="form-input" type="text" placeholder="Contract Code" id="monnify-contract-code" style="font-family:var(--font-mono);font-size:13px" />
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+            <div class="toggle on" onclick="this.classList.toggle('on')" title="Enable/Disable"></div>
+            <button class="btn-icon" onclick="saveProvider('monnify')">Save</button>
+          </div>
+        </div>
+
+        <!-- PAYSTACK -->
+        <div class="provider-row">
+          <div class="provider-logo">💚</div>
+          <div style="flex:1">
+            <div class="provider-name">Paystack</div>
+            <div class="provider-desc">Alternative payment gateway for card & USSD payments</div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+              <input class="form-input" type="text" placeholder="Public Key (pk_live_XXXXXX)" id="paystack-public" style="font-family:var(--font-mono);font-size:13px" />
+              <input class="form-input" type="password" placeholder="Secret Key (sk_live_XXXXXX)" id="paystack-secret" style="font-family:var(--font-mono);font-size:13px" />
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+            <div class="toggle" onclick="this.classList.toggle('on')"></div>
+            <button class="btn-icon" onclick="saveProvider('paystack')">Save</button>
+          </div>
+        </div>
+
+        <!-- GSUBZ -->
+        <div class="provider-row">
+          <div class="provider-logo">📶</div>
+          <div style="flex:1">
+            <div class="provider-name">GSUBZ</div>
+            <div class="provider-desc">Data vending API — MTN, Airtel, Glo, 9Mobile bundles</div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+              <input class="form-input" type="text" placeholder="API Token" id="gsubz-token" style="font-family:var(--font-mono);font-size:13px" />
+              <input class="form-input" type="text" placeholder="Base URL (https://gsubz.com/api/)" id="gsubz-url" style="font-family:var(--font-mono);font-size:13px" />
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+            <button class="btn-icon" onclick="saveProvider('gsubz')">Save</button>
+          </div>
+        </div>
+
+        <!-- SMEPLUG -->
+        <div class="provider-row">
+          <div class="provider-logo">🔌</div>
+          <div style="flex:1">
+            <div class="provider-name">SMEPlug</div>
+            <div class="provider-desc">Data & airtime vending — alternative provider</div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+              <input class="form-input" type="password" placeholder="API Key" id="smeplug-key" style="font-family:var(--font-mono);font-size:13px" />
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+            <div class="toggle" onclick="this.classList.toggle('on')"></div>
+            <button class="btn-icon" onclick="saveProvider('smeplug')">Save</button>
+          </div>
+        </div>
+
+        <!-- VTPASS -->
+        <div class="provider-row">
+          <div class="provider-logo">⚡</div>
+          <div style="flex:1">
+            <div class="provider-name">VTPass</div>
+            <div class="provider-desc">Electricity tokens, cable TV subscriptions, exam pins</div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+              <input class="form-input" type="text" placeholder="API Key" id="vtpass-key" style="font-family:var(--font-mono);font-size:13px" />
+              <input class="form-input" type="password" placeholder="Secret Key" id="vtpass-secret" style="font-family:var(--font-mono);font-size:13px" />
+              <input class="form-input" type="text" placeholder="Public Key" id="vtpass-public" style="font-family:var(--font-mono);font-size:13px" />
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+            <button class="btn-icon" onclick="saveProvider('vtpass')">Save</button>
+          </div>
+        </div>
+
+        <!-- AUTOPILOTNG -->
+        <div class="provider-row">
+          <div class="provider-logo">🤖</div>
+          <div style="flex:1">
+            <div class="provider-name">AutopilotNG</div>
+            <div class="provider-desc">Automated data vending & airtime provider</div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+              <input class="form-input" type="password" placeholder="API Token" id="autopilot-token" style="font-family:var(--font-mono);font-size:13px" />
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+            <div class="toggle" onclick="this.classList.toggle('on')"></div>
+            <button class="btn-icon" onclick="saveProvider('autopilot')">Save</button>
+          </div>
+        </div>
+
+        <!-- OGDAMS -->
+        <div class="provider-row">
+          <div class="provider-logo">🌐</div>
+          <div style="flex:1">
+            <div class="provider-name">OGDAMS</div>
+            <div class="provider-desc">Data vending & gifting API</div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+              <input class="form-input" type="password" placeholder="API Key" id="ogdams-key" style="font-family:var(--font-mono);font-size:13px" />
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+            <div class="toggle" onclick="this.classList.toggle('on')"></div>
+            <button class="btn-icon" onclick="saveProvider('ogdams')">Save</button>
+          </div>
+        </div>
+
+        <!-- GEODNATECH -->
+        <div class="provider-row">
+          <div class="provider-logo">🧬</div>
+          <div style="flex:1">
+            <div class="provider-name">GeoDNATech</div>
+            <div class="provider-desc">Data vending & virtual services</div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+              <input class="form-input" type="password" placeholder="API Key" id="geodna-key" style="font-family:var(--font-mono);font-size:13px" />
+              <input class="form-input" type="text" placeholder="Username" id="geodna-user" style="font-family:var(--font-mono);font-size:13px" />
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+            <div class="toggle" onclick="this.classList.toggle('on')"></div>
+            <button class="btn-icon" onclick="saveProvider('geodna')">Save</button>
+          </div>
+        </div>
+
+        <!-- DATAMALL -->
+        <div class="provider-row">
+          <div class="provider-logo">🏪</div>
+          <div style="flex:1">
+            <div class="provider-name">DataMall</div>
+            <div class="provider-desc">Bulk data reseller API</div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+              <input class="form-input" type="password" placeholder="API Token" id="datamall-token" style="font-family:var(--font-mono);font-size:13px" />
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+            <div class="toggle" onclick="this.classList.toggle('on')"></div>
+            <button class="btn-icon" onclick="saveProvider('datamall')">Save</button>
+          </div>
+        </div>
+
+        <!-- SUDO / Virtual Cards -->
+        <div class="provider-row">
+          <div class="provider-logo">💳</div>
+          <div style="flex:1">
+            <div class="provider-name">Sudo Africa</div>
+            <div class="provider-desc">Virtual USD & Naira card issuance API</div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+              <input class="form-input" type="password" placeholder="API Key" id="sudo-key" style="font-family:var(--font-mono);font-size:13px" />
+              <input class="form-input" type="text" placeholder="Business ID" id="sudo-business" style="font-family:var(--font-mono);font-size:13px" />
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+            <div class="toggle" onclick="this.classList.toggle('on')"></div>
+            <button class="btn-icon" onclick="saveProvider('sudo')">Save</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="/zelvapay/js/main.js"></script>
+<script>
+function saveProvider(name) {
+  showToast(`${name.toUpperCase()} API keys saved`, 'success');
+}
+function generateKey() {
+  showToast('New API key generated. Check your email to confirm.', 'success');
+}
+function saveWebhook() {
+  showToast('Webhook URL saved successfully', 'success');
+}
+function testWebhook() {
+  showToast('Test webhook sent to your URL', 'success');
+}
+function switchEnv(btn, env) {
+  document.querySelectorAll('.env-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  showToast(`Switched to ${env === 'live' ? '🟢 Live' : '🟠 Test'} environment`, 'success');
+}
+</script>
+</body>
+</html>

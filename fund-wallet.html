@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fund Wallet — ZelvaPay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/zelvapay/css/main.css" />
+</head>
+<body>
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><a href="/zelvapay/index.html" class="nav-logo" style="font-family:var(--font-display);font-size:20px;font-weight:800;">Zelva<span style="color:var(--accent)">Pay</span></a></div>
+    <nav class="sidebar-nav">
+      <a href="/zelvapay/pages/dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a>
+      <a href="/zelvapay/pages/data.html"><span class="nav-icon">📶</span> Buy Data</a>
+      <a href="/zelvapay/pages/airtime.html"><span class="nav-icon">📱</span> Buy Airtime</a>
+      <a href="/zelvapay/pages/electricity.html"><span class="nav-icon">⚡</span> Electricity</a>
+      <a href="/zelvapay/pages/cable.html"><span class="nav-icon">📺</span> Cable TV</a>
+      <a href="/zelvapay/pages/virtual-card.html"><span class="nav-icon">💳</span> Virtual Cards</a>
+      <a href="/zelvapay/pages/giftcard.html"><span class="nav-icon">🎁</span> Gift Cards</a>
+      <a href="/zelvapay/pages/transfer.html"><span class="nav-icon">🏦</span> Transfer</a>
+      <a href="/zelvapay/pages/transactions.html"><span class="nav-icon">📋</span> Transactions</a>
+      <a href="/zelvapay/pages/api-settings.html"><span class="nav-icon">🔑</span> API Settings</a>
+      <a href="/zelvapay/pages/fund-wallet.html" class="active"><span class="nav-icon">💰</span> Fund Wallet</a>
+      <a href="/zelvapay/pages/profile.html"><span class="nav-icon">👤</span> Profile</a>
+    </nav>
+    <div class="sidebar-footer"><div class="user-info"><div class="user-avatar">MA</div><div><div class="user-name">Muhammad Auwal</div></div></div></div>
+  </aside>
+  <main class="main-content">
+    <div style="max-width:560px">
+      <div class="page-header"><div><h1 class="page-title">Fund Wallet</h1><p class="page-sub">Add money to your ZelvaPay wallet.</p></div></div>
+
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab(this,'tab-transfer')">Bank Transfer</button>
+        <button class="tab" onclick="switchTab(this,'tab-card')">Debit Card</button>
+        <button class="tab" onclick="switchTab(this,'tab-ussd')">USSD</button>
+      </div>
+
+      <!-- BANK TRANSFER -->
+      <div id="tab-transfer">
+        <div class="section-card">
+          <div style="padding:28px">
+            <p style="color:var(--text2);font-size:14px;margin-bottom:20px">Transfer to the account number below. Your wallet is credited automatically within seconds.</p>
+            <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);padding:24px;margin-bottom:20px">
+              <div style="display:flex;justify-content:space-between;margin-bottom:16px">
+                <div>
+                  <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Bank Name</div>
+                  <div style="font-size:16px;font-weight:600">Wema Bank (9PSB)</div>
+                </div>
+                <div style="text-align:right">
+                  <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Powered by</div>
+                  <div style="font-size:14px;color:var(--accent);font-weight:600">Monnify</div>
+                </div>
+              </div>
+              <div style="margin-bottom:16px">
+                <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Account Number</div>
+                <div style="font-family:var(--font-mono);font-size:28px;font-weight:700;letter-spacing:4px;color:var(--text)">9140012345</div>
+              </div>
+              <div>
+                <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Account Name</div>
+                <div style="font-size:16px;font-weight:600">ZelvaPay / AUWAL MUHAMMAD</div>
+              </div>
+            </div>
+            <button class="btn-outline btn-full" onclick="copyText('9140012345', this)">📋 Copy Account Number</button>
+            <p style="text-align:center;color:var(--text3);font-size:12px;margin-top:12px">This is your permanent virtual account. Use it anytime to fund your wallet.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD -->
+      <div id="tab-card" style="display:none">
+        <div class="section-card">
+          <div style="padding:28px">
+            <form onsubmit="submitForm(event,'Card payment initiated! Redirecting to payment page...')">
+              <div class="form-group">
+                <label class="form-label">Amount (₦)</label>
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">
+                  <button type="button" class="btn-outline" style="padding:10px;font-size:13px" onclick="setFundAmt(1000)">₦1k</button>
+                  <button type="button" class="btn-outline" style="padding:10px;font-size:13px" onclick="setFundAmt(5000)">₦5k</button>
+                  <button type="button" class="btn-outline" style="padding:10px;font-size:13px" onclick="setFundAmt(10000)">₦10k</button>
+                  <button type="button" class="btn-outline" style="padding:10px;font-size:13px" onclick="setFundAmt(50000)">₦50k</button>
+                </div>
+                <div class="input-group"><span class="input-prefix">₦</span><input class="form-input" type="number" id="fund-amt" placeholder="Enter amount" min="100" /></div>
+                <p class="form-hint">1.5% card processing fee applies</p>
+              </div>
+              <div style="display:flex;gap:12px;margin-bottom:20px">
+                <button type="button" class="btn-outline" style="padding:12px;flex:1;font-size:13px;font-weight:600" onclick="payWith('paystack')">Pay with Paystack</button>
+                <button type="button" class="btn-outline" style="padding:12px;flex:1;font-size:13px;font-weight:600" onclick="payWith('monnify')">Pay with Monnify</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- USSD -->
+      <div id="tab-ussd" style="display:none">
+        <div class="section-card">
+          <div style="padding:28px">
+            <p style="color:var(--text2);font-size:14px;margin-bottom:20px">Dial the code for your bank to fund your wallet without internet.</p>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;display:flex;justify-content:space-between;align-items:center">
+                <div><div style="font-weight:600">GTBank</div><div style="font-size:12px;color:var(--text3)">*737*amount*accountnumber#</div></div>
+                <button class="btn-icon" onclick="copyText('*737*1000*9140012345#', this)">Copy</button>
+              </div>
+              <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;display:flex;justify-content:space-between;align-items:center">
+                <div><div style="font-weight:600">Access Bank</div><div style="font-size:12px;color:var(--text3)">*901*amount*accountnumber#</div></div>
+                <button class="btn-icon" onclick="copyText('*901*1000*9140012345#', this)">Copy</button>
+              </div>
+              <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;display:flex;justify-content:space-between;align-items:center">
+                <div><div style="font-weight:600">Zenith Bank</div><div style="font-size:12px;color:var(--text3)">*966*amount*accountnumber#</div></div>
+                <button class="btn-icon" onclick="copyText('*966*1000*9140012345#', this)">Copy</button>
+              </div>
+              <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;display:flex;justify-content:space-between;align-items:center">
+                <div><div style="font-weight:600">UBA</div><div style="font-size:12px;color:var(--text3)">*919*amount*accountnumber#</div></div>
+                <button class="btn-icon" onclick="copyText('*919*1000*9140012345#', this)">Copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script src="/zelvapay/js/main.js"></script>
+<script>
+function setFundAmt(v) { document.getElementById('fund-amt').value = v; }
+function payWith(provider) {
+  showToast('Redirecting to ' + (provider === 'paystack' ? 'Paystack' : 'Monnify') + ' payment page...', 'success');
+}
+</script>
+</body>
+</html>
